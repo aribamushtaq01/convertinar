@@ -1,0 +1,390 @@
+.section {
+  padding: 8rem 0;
+  background: white;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #111827 0%, #374151 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stagesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  position: relative;
+}
+
+.stageCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+}
+
+.phoneMockup {
+  width: 240px;
+  height: 480px;
+  background: #0a0a0a;
+  border-radius: 44px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin-bottom: 3rem;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.stageCard:hover .phoneMockup {
+  transform: translateY(-20px) rotateX(10deg);
+  border-color: rgba(129, 187, 38, 0.3);
+  box-shadow: 0 40px 80px rgba(129, 187, 38, 0.15);
+}
+
+.phoneSpeaker {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  z-index: 10;
+}
+
+.phoneScreen {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 34px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stageNumber {
+  width: 36px;
+  height: 36px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 20px rgba(129, 187, 38, 0.3);
+  transition: all 0.3s ease;
+}
+
+.stageCard:hover .stageNumber {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(129, 187, 38, 0.6);
+}
+
+.stageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.stageDesc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 250px;
+}
+
+/* Internal Content Styles */
+.uploadDropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  color: #6b7280;
+  padding: 1.5rem;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dragging {
+  background: rgba(129, 187, 38, 0.05);
+  box-shadow: inset 0 0 0 3px var(--primary);
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.dropCircle {
+  width: 64px;
+  height: 64px;
+  background: rgba(129, 187, 38, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.dragging .dropCircle {
+  transform: scale(1.1);
+  background: var(--primary);
+  color: white;
+}
+
+.loader {
+  width: 44px;
+  height: 44px;
+  border: 4px solid rgba(129, 187, 38, 0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.textStack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.uploadStatus {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.uploadHint {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.selectButton {
+  padding: 0.8rem 1.6rem;
+  background: var(--primary);
+  color: white;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(129, 187, 38, 0.2);
+}
+
+.selectButton:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.selectButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #9ca3af;
+}
+
+/* Signup Prompt Styles */
+.signupPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.successIcon {
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 20px rgba(129, 187, 38, 0.3);
+}
+
+.signupTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.signupDesc {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.signupButton {
+  width: 100%;
+  padding: 1rem;
+  background: #111827;
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.signupButton:hover {
+  background: #000;
+  transform: scale(1.02);
+}
+
+.resetLink {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.resetLink:hover {
+  text-decoration: underline;
+}
+
+.qrPreview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #f9fafb;
+}
+
+.qrInner {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.scanLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+  box-shadow: 0 0 15px var(--primary);
+  animation: scan 3s infinite ease-in-out;
+  z-index: 5;
+}
+
+.arExperience {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.arVisual {
+  width: 120px;
+  height: 120px;
+  background: var(--primary);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(129, 187, 38, 0.3);
+  animation: rotate3D 6s infinite linear;
+}
+
+.scanBadge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  background: rgba(129, 187, 38, 0.1);
+  padding: 0.4rem 1rem;
+  border-radius: 99px;
+}
+
+@keyframes scan {
+  0% { top: 20%; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 80%; opacity: 0; }
+}
+
+@keyframes rotate3D {
+  from { transform: perspective(1000px) rotateY(0deg) rotateX(20deg); }
+  to { transform: perspective(1000px) rotateY(360deg) rotateX(20deg); }
+}
+
+@media (max-width: 1024px) {
+  .stagesGrid {
+    gap: 2rem;
+  }
+  .phoneMockup {
+    width: 200px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stagesGrid {
+    grid-template-columns: 1fr;
+    gap: 6rem;
+  }
+  .phoneMockup {
+    width: 280px;
+    height: 560px;
+  }
+}

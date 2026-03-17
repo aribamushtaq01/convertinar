@@ -1,0 +1,340 @@
+.heroSection {
+  padding-top: calc(var(--nav-height) + 4rem);
+  padding-bottom: 3rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: flex-start;
+  position: relative;
+  z-index: 10;
+}
+
+/* Left Column */
+.contentColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heading {
+  font-size: 4rem;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.subheading {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+.ctaGroup {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.primaryCta {
+  background: var(--primary);
+  color: white;
+  padding: 1.1rem 2.8rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 25px rgba(129, 187, 38, 0.2);
+  letter-spacing: 0.02em;
+}
+
+.primaryCta:hover {
+  transform: translateY(-4px);
+  background: var(--primary-hover);
+  box-shadow: 0 15px 35px rgba(129, 187, 38, 0.4);
+}
+
+.secondaryCta {
+  background: transparent;
+  color: var(--foreground);
+  padding: 1.1rem 2.8rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.02em;
+}
+
+.secondaryCta:hover {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--primary-hover);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.7rem;
+}
+
+.trustedBy {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.trustedLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.trustedLogos {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.logoCircle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+}
+
+.logoCircle:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Right Column */
+.visualColumn {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 3.2rem;
+}
+
+.visualWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.arMockupContainer {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 600px;
+}
+
+/* Floating QR Element */
+.qrElement {
+  position: absolute;
+  top: 10%;
+  left: -20%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: floatQR 5s ease-in-out infinite;
+}
+
+.qrCodeWrapper {
+  width: 200px;
+  height: 200px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.qrImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.qrScannerLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  animation: scan 2.5s ease-in-out infinite;
+}
+
+.qrLabel {
+  background: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--foreground);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile Phone Mockup */
+.phoneMockup {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 560px;
+  background: #111;
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+  transform: rotate(5deg);
+  transform-origin: bottom right;
+  animation: floatPhone 6s ease-in-out infinite;
+}
+
+.phoneScreen {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.phoneNotch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 24px;
+  background: #111;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 20;
+}
+
+.arVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.glowPrimary {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 1;
+  opacity: 0.15;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--primary);
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes floatQR {
+  0% { transform: translateY(0px) rotate(-5deg); }
+  50% { transform: translateY(-15px) rotate(-2deg); }
+  100% { transform: translateY(0px) rotate(-5deg); }
+}
+
+@keyframes floatPhone {
+  0% { transform: rotate(5deg) translateY(0px); }
+  50% { transform: rotate(3deg) translateY(-10px); }
+  100% { transform: rotate(5deg) translateY(0px); }
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@media (max-width: 968px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .visualColumn {
+    min-height: 600px;
+    order: -1;
+    margin-top: 2rem;
+  }
+
+  .qrElement {
+    left: -10%;
+  }
+
+  .phoneMockup {
+    right: auto;
+    left: 20%;
+  }
+
+  .heading {
+    font-size: 3rem;
+  }
+}
