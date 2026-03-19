@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import UseCases from "@/components/UseCases";
+import DetailedUseCases from "@/components/DetailedUseCases";
 import HowToUse from "@/components/HowToUse";
 import UseAnywhere from "@/components/UseAnywhere";
 // import FAQ from "@/components/FAQ";
@@ -19,6 +20,7 @@ export default function Home() {
         <HowToUse />
         <Showcase />
         <UseAnywhere />
+        <DetailedUseCases />
         <CaseStudies />
         {/* <FAQ /> */}
         <AppPromotion />
