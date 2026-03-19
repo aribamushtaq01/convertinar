@@ -26,7 +26,7 @@ export default function Hero() {
           </div>
 
           <div className={styles.trustedBy}>
-            <p className={styles.trustedLabel}>Trusted By</p>
+            <p className={styles.trustedLabel}></p>
             <div className={styles.trustedLogos}>
               <div className={styles.logoCircle}>A</div>
               <div className={styles.logoCircle}>B</div>

@@ -16,8 +16,8 @@
 }
 
 .sectionHeading {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.4);
   margin-bottom: 7rem;
   text-align: center;
@@ -76,13 +76,13 @@
 
 .placeholderImg {
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 500;
   color: var(--primary);
 }
 
 .cardTitle {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 500;
   color: #fff;
   margin: 0;
 }
@@ -101,7 +101,7 @@
 }
 
 .cardDetail {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
@@ -119,8 +119,8 @@
   color: white;
   padding: 1.1rem 2.8rem;
   border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 500;
   box-shadow: 0 10px 25px rgba(129, 187, 38, 0.2);
   letter-spacing: 0.05em;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

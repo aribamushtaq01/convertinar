@@ -29,14 +29,14 @@
 }
 
 .heading {
-  font-size: 4rem;
-  line-height: 1.1;
-  font-weight: 800;
-  letter-spacing: -1px;
+  font-size: 3.5rem;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .subheading {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: var(--text-muted);
   line-height: 1.6;
   max-width: 90%;
@@ -55,7 +55,7 @@
   padding: 1.1rem 2.8rem;
   border-radius: 999px;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 10px 25px rgba(129, 187, 38, 0.2);
   letter-spacing: 0.02em;
@@ -73,7 +73,7 @@
   padding: 1.1rem 2.8rem;
   border-radius: 999px;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 500;
   border: 1px solid var(--border);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: 0.02em;
@@ -114,7 +114,7 @@
 }
 
 .trustedBy {
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -140,7 +140,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--text-muted);
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -296,22 +296,51 @@
 
 /* Animations */
 @keyframes floatQR {
-  0% { transform: translateY(0px) rotate(-5deg); }
-  50% { transform: translateY(-15px) rotate(-2deg); }
-  100% { transform: translateY(0px) rotate(-5deg); }
+  0% {
+    transform: translateY(0px) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(-2deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(-5deg);
+  }
 }
 
 @keyframes floatPhone {
-  0% { transform: rotate(5deg) translateY(0px); }
-  50% { transform: rotate(3deg) translateY(-10px); }
-  100% { transform: rotate(5deg) translateY(0px); }
+  0% {
+    transform: rotate(5deg) translateY(0px);
+  }
+
+  50% {
+    transform: rotate(3deg) translateY(-10px);
+  }
+
+  100% {
+    transform: rotate(5deg) translateY(0px);
+  }
 }
 
 @keyframes scan {
-  0% { top: 0; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
 }
 
 @media (max-width: 968px) {
@@ -335,6 +364,6 @@
   }
 
   .heading {
-    font-size: 3rem;
+    font-size: 2.6rem;
   }
 }
