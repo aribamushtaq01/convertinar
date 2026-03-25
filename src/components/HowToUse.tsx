@@ -214,6 +214,18 @@ export default function HowToUse() {
                     {stage.title}
                   </motion.h2>
                   <p className={styles.stageDesc}>{stage.desc}</p>
+                  <motion.button
+                    className={styles.tryFreeBtn}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    Try for free
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14"></path>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </motion.button>
                 </div>
               </motion.div>
             ))}

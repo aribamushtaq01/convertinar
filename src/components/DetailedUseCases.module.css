@@ -12,13 +12,12 @@
 
 /* ── Tabs ── */
 .sectionTitle {
-  font-family: 'Inter Tight', 'Inter', sans-serif;
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
-  font-weight: 800;
+  font-size: 2.6rem;
+  font-weight: 600;
   text-align: center;
   color: #ffffff;
   margin-bottom: 32px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .tabsWrapper {
@@ -30,14 +29,16 @@
 
 .tabsScroll {
   display: flex;
-  gap: 60px;
+  gap: 40px;
   overflow-x: auto;
-  padding: 5px 10px 15px;
+  padding: 5px 20px 15px;
   scrollbar-width: none;
   -ms-overflow-style: none;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
+  max-width: max-content;
+  margin: 0 auto;
 }
 
 .tabsScroll::-webkit-scrollbar {
@@ -179,7 +180,6 @@
 }
 
 .detailTitle {
-  font-family: 'Inter Tight', 'Inter', sans-serif;
   font-size: clamp(2.5rem, 4.5vw, 5rem);
   font-weight: 800;
   line-height: 1.05;
@@ -189,7 +189,6 @@
 }
 
 .detailSubtitle {
-  font-family: 'Figtree', sans-serif;
   font-size: clamp(0.85rem, 1.1vw, 1rem);
   font-weight: 500;
   line-height: 1.6;
@@ -212,7 +211,6 @@
 }
 
 .featureLabel {
-  font-family: 'Figtree', sans-serif;
   font-size: clamp(0.875rem, 1.1vw, 1rem);
   font-weight: 700;
   color: #ffffff;
