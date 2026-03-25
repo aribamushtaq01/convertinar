@@ -199,7 +199,15 @@ const Card = ({ i, study, progress, range, targetScale, targetBrightness }: any)
         }}
       >
         <div className={styles.cardHeader}>
-          <h2 className={styles.cardSectionTitle}>{study.sectionTitle}</h2>
+          <motion.h2
+            className={styles.cardSectionTitle}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {study.sectionTitle}
+          </motion.h2>
           <div className={styles.pillGroup}>
             {study.pills.map((pill: string) => (
               <button
@@ -228,7 +236,15 @@ const Card = ({ i, study, progress, range, targetScale, targetBrightness }: any)
                 <div className={styles.eyebrowBox}>
                   <span className={styles.eyebrowText}>{currentData.eyebrow}</span>
                 </div>
-                <h3 className={styles.caseTitle}>{currentData.title}</h3>
+                <motion.h3
+                  className={styles.caseTitle}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  {currentData.title}
+                </motion.h3>
                 <p className={styles.caseDesc}>{currentData.desc}</p>
 
                 <div className={styles.metricsGrid}>
@@ -269,7 +285,15 @@ export default function CaseStudies() {
     <section ref={container} className={styles.section} id="case-studies">
       <div className={styles.container}>
         <div className={styles.mainHeader}>
-          <h2 className={styles.mainTitle}>Impactful Success Stories</h2>
+          <motion.h2
+            className={styles.mainTitle}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            Impactful <span className="gradient-text">Success Stories</span>
+          </motion.h2>
           <p className={styles.mainSubtitle}>
             Upload an image. Get a 3D model. Drop a QR code. Watch customers
             experience your product in their world — before they ever buy.

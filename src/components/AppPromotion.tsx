@@ -44,10 +44,10 @@ export default function AppPromotion() {
         <div className={styles.content}>
           <motion.h2
             className={styles.title}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             Bring Ideas to <span className="gradient-text">Life.</span>
           </motion.h2>

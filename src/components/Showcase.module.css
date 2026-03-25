@@ -125,7 +125,7 @@
 }
 
 @media (max-width: 1024px) {
-  .swiperSlide img {
+  .swiperSlide .videoPlayer {
     height: 500px;
   }
 }
@@ -143,7 +143,7 @@
     display: none;
   }
 
-  .swiperSlide img {
+  .swiperSlide .videoPlayer {
     height: 400px;
   }
 }

@@ -2,37 +2,41 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import styles from "./DetailedUseCases.module.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 const useCases = [
   {
-    id: "e-eommerce",
+    id: "e-commerce",
     label: "E-Commerce",
+    thumbnail: "/e-commerce.png",
     accentFrom: "#9CB2B3", accentTo: "#D1DADB",
     subtitleColor: "#C1EBED", btnFrom: "#91BDBF", btnTo: "#C1EBED",
     subtitle: "Sell more. Return less.",
-    features: ["Let shoppers place your product in their own space before they checkout.", "Works on Shopify, WooCommerce, IKEA, and any custom store one snippet of code brings AR to every product page. ", "Brands using AR see up to 94% higher conversion and 40% fewer returns."],
-    href: "/use-cases/film-production",
+    features: ["Let shoppers place your product in their own space before they checkout.", "Works on Shopify, WooCommerce, IKEA, and any custom store.", "Brands using AR see up to 94% higher conversion and 40% fewer returns."],
+    href: "/use-cases/e-commerce",
     image: "https://cdn.meshy.ai/ti_w:1200,q:75/landing-assets/home/meshy-use-case-hero-film-production.webp",
     video: null,
   },
   {
     id: "marketing-campaigns",
     label: "Marketing Campaigns",
+    thumbnail: "/marketing.png",
     accentFrom: "#00A0FE", accentTo: "#9ADAF3",
     subtitleColor: "#8FD9FF", btnFrom: "#6DD8FF", btnTo: "#97F6FF",
     subtitle: "Make your ads impossible to scroll pass.",
-    features: ["Turn static visuals into interactive AR experiences that live inside QR codes on posters, packaging, and print ads. ", "Let customers launch your product in their world straight from a flyer, a billboard, or an Instagram story.", "AR experiences drive 3x longer engagement than standard product content."],
-    href: "/use-cases/product-design",
+    features: ["Turn static visuals into interactive AR experiences with QR codes.", "Launch products straight from flyers, billboards, or social stories.", "AR experiences drive 3x longer engagement than standard content."],
+    href: "/use-cases/marketing-campaigns",
     image: "https://cdn.meshy.ai/ti_w:1200,q:75/landing-assets/home/meshy-use-case-hero-product-design.webp",
     video: null,
   },
   {
     id: "education",
     label: "Education",
+    thumbnail: "/education.png",
     accentFrom: "#8D7E3B", accentTo: "#DCC89C",
     subtitleColor: "#D2B894", btnFrom: "#D2B894", btnTo: "#E8DFB5",
     subtitle: "Affordable and Accessible 3D Models for educators and students",
-    features: ["Unleash creativity in 3D printing classes", "Power Game & XR Education", "Speed Up Educational App Development"],
+    features: ["Unleash creativity in 3D printing classes.", "Power Game & XR Education.", "Speed Up Educational App Development."],
     href: "/use-cases/education",
     image: "https://cdn.meshy.ai/ti_w:1200,q:75/landing-assets/home/meshy-use-case-hero-education.webp",
     video: null,
@@ -40,11 +44,12 @@ const useCases = [
   {
     id: "game-development",
     label: "Game Development",
+    thumbnail: "/gaming.png",
     accentFrom: "#138DA0", accentTo: "#7AE2CF",
     subtitleColor: "#69FFE5", btnFrom: "#69FFE5", btnTo: "#9EFFEE",
     subtitle: "Put your characters and assets into the real world.",
-    features: ["Remesh & PBR Texture support", "Animate Your Game Characters", "Export Seamlessly to Any Game Engine"],
-    href: "/use-cases/free-game-assets",
+    features: ["Remesh & PBR Texture support.", "Animate Your Game Characters.", "Export Seamlessly to Any Game Engine."],
+    href: "/use-cases/game-development",
     image: null,
     video: "https://cdn.meshy.ai/landing-assets/home/meshy-use-case-hero-game-development.webm",
   },
@@ -121,7 +126,17 @@ export default function DetailedUseCases() {
     <section className={styles.section}>
       <div className={styles.inner}>
 
-        {/* Tab Pills */}
+        <motion.h2
+          className={styles.sectionTitle}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          Who Uses <span className="gradient-text">ConvertInAr</span>
+        </motion.h2>
+
+        {/* Tab Thumbnails */}
         <div className={styles.tabsWrapper}>
           <div className={styles.tabsScroll} ref={tabsRef}>
             {useCases.map((uc, i) => (
@@ -129,14 +144,18 @@ export default function DetailedUseCases() {
                 key={uc.id}
                 onMouseEnter={() => triggerTransition(i)}
                 onClick={() => triggerTransition(i)}
-                className={`${styles.tabPill} ${i === activeDisplayIndex ? styles.tabPillActive : ""}`}
-                style={
-                  i === activeDisplayIndex
-                    ? { background: `linear-gradient(to bottom, ${uc.accentFrom}, ${uc.accentTo})` }
-                    : {}
-                }
+                className={`${styles.useCaseThumb} ${i === activeDisplayIndex ? styles.thumbActive : ""}`}
               >
-                {uc.label}
+                <div
+                  className={styles.thumbBackground}
+                  style={{ background: `linear-gradient(to bottom, ${uc.accentFrom}, ${uc.accentTo})` }}
+                />
+                <img
+                  src={uc.thumbnail}
+                  alt={uc.label}
+                  className={styles.thumbImage}
+                />
+                <div className={styles.thumbLabel}>{uc.label}</div>
               </button>
             ))}
           </div>
@@ -174,7 +193,15 @@ function PanelContent({
     <>
       {/* Left */}
       <div className={styles.detailText}>
-        <h2 className={styles.detailTitle}>{uc.label}</h2>
+        <motion.h2
+          className={styles.detailTitle}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {uc.label}
+        </motion.h2>
         <p className={styles.detailSubtitle} style={{ color: uc.subtitleColor }}>
           {uc.subtitle}
         </p>

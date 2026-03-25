@@ -8,6 +8,7 @@ export default function HowToUse() {
   const [isUploading, setIsUploading] = React.useState(false);
   const [showSignup, setShowSignup] = React.useState(false);
   const [isDragging, setIsDragging] = React.useState(false);
+  const [activeStep, setActiveStep] = React.useState(1);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const handleFile = (file: File | undefined) => {
@@ -141,43 +142,82 @@ export default function HowToUse() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <motion.div
-          className={styles.sectionHeader}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className={styles.title}>Simple 3-Step Process</h2>
-          <p className={styles.subtitle}>
-            Transform your digital assets into immersive AR experiences in minutes.
-          </p>
-        </motion.div>
-
-        <div className={styles.stagesGrid}>
-          {stages.map((stage, index) => (
-            <motion.div
-              key={index}
-              className={styles.stageCard}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-            >
-              <div className={styles.visualCard}>
-                <div className={styles.cardHeader}>
-                  <div className={styles.dot}></div>
-                  <div className={styles.dot}></div>
-                  <div className={styles.dot}></div>
-                </div>
-                <div className={styles.cardContent}>
-                  {stage.content}
-                </div>
+        <div className={styles.paginationWrapper}>
+          <div className={styles.paginationSticky}>
+            {[1, 2, 3].map((num) => (
+              <div 
+                key={num} 
+                className={`${styles.paginationItem} ${activeStep === num ? styles.active : ''}`}
+                onClick={() => {
+                   const element = document.getElementById(`step-${num}`);
+                   element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }}
+              >
+                {num < 10 ? `0${num}` : num}
               </div>
-              <div className={styles.stageNumber}>{stage.number}</div>
-              <h3 className={styles.stageTitle}>{stage.title}</h3>
-              <p className={styles.stageDesc}>{stage.desc}</p>
-            </motion.div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.sectionHeader}>
+          <motion.h2
+            className={styles.title}
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            How It Works
+          </motion.h2>
+          <motion.h3
+            className={styles.subtitle}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+          >
+            Build your AR in <span className="gradient-text">3</span> easy steps
+          </motion.h3>
+        </div>
+
+        <div className={styles.scrollArea}>
+          <div className={styles.stagesList}>
+            {stages.map((stage, index) => (
+              <motion.div
+                key={index}
+                id={`step-${stage.number}`}
+                className={`${styles.stepLayout} ${activeStep === stage.number ? styles.stepActive : ''}`}
+                onViewportEnter={() => setActiveStep(stage.number)}
+                viewport={{ once: false, margin: "-45% 0px -45% 0px" }}
+              >
+                <div className={styles.stepVisualContainer}>
+                  <div className={styles.visualCard}>
+                    <div className={styles.cardHeader}>
+                      <div className={styles.dot}></div>
+                      <div className={styles.dot}></div>
+                      <div className={styles.dot}></div>
+                    </div>
+                    <div className={styles.cardContent}>
+                      {stage.content}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className={styles.stepTextContainer}>
+                  <div className={styles.mobileStageNumber}>{stage.number}</div>
+                  <motion.h2
+                    className={styles.stepMainTitle}
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    {stage.title}
+                  </motion.h2>
+                  <p className={styles.stageDesc}>{stage.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

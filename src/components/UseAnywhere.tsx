@@ -18,17 +18,17 @@ export default function UseAnywhere() {
 
   return (
     <section className={styles.section}>
-      <motion.div
-        className={styles.container}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <h2 className={styles.title}>
+      <div className={styles.container}>
+        <motion.h2 
+          className={styles.title}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           One <span style={{ color: '#81BB26' }}>QR Code</span>. Use Anywhere.
-        </h2>
-      </motion.div>
+        </motion.h2>
+      </div>
 
       <motion.div
         className={styles.marqueeWrapper}

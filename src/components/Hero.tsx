@@ -1,6 +1,9 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import styles from './Hero.module.css';
 
 export default function Hero() {
@@ -9,9 +12,14 @@ export default function Hero() {
       <div className={styles.container}>
         {/* Left Column: Content */}
         <div className={styles.contentColumn}>
-          <h1 className={styles.heading}>
+          <motion.h1 
+            className={styles.heading}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             Create and experience <span className="gradient-text">Ar</span>
-          </h1>
+          </motion.h1>
           <p className={styles.subheading}>
             One platform to create and share immersive 3D/AR experiences. No app required.
           </p>
