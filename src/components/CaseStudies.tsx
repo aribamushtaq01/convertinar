@@ -5,12 +5,11 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import styles from './CaseStudies.module.css';
 
 // ─── Card 1: Success Stories by Industry ────────────────────────────────────
-// All copy is AR/3D/QR-first — upload an image, get a 3D model, scan to experience
 const INDUSTRY_DATA = {
   "Home & Furniture": {
     eyebrow: "IKEA ALREADY WINS",
-    title: "How IKEA turned product photos into AR rooms customers walk into",
-    desc: "IKEA uploads a single product image — ConvertinAr generates a photorealistic 3D model in minutes. Shoppers scan a QR code on any product page and place true-to-scale furniture inside their own room before checkout. See it. Size it. Own it.",
+    title: "How IKEA Turned Product Photos into True-to-Scale AR Furniture Experiences",
+    desc: "IKEA uploads a single product photo to ConvertinAr which instantly generates a photorealistic 3D model. Customers scan the QR code on the product page or catalogue to place the furniture life-size in their own room using augmented reality. This seamless image to 3D to AR experience builds shopper confidence before purchase and drives higher conversions with fewer returns.",
     metrics: [
       { value: "+94%", label: "Conversion Lift" },
       { value: "−40%", label: "Return Rate" },
@@ -19,8 +18,8 @@ const INDUSTRY_DATA = {
   },
   "E-Commerce": {
     eyebrow: "SHOPIFY BRANDS ALREADY WIN",
-    title: "How e-commerce brands let shoppers place products in their space before buying",
-    desc: "Upload a product image. ConvertinAr converts it into a 3D AR model — no 3D studio needed. A single QR code or embed snippet puts that model on every product page. Shoppers scan, see the product life-size in their room, and buy with confidence.",
+    title: "How E-Commerce Brands Let Shoppers Visualize Products in Their Space with QR AR",
+    desc: "Upload any product image or existing 3D model to ConvertinAr and receive a ready-to-use photorealistic 3D AR model in minutes. A single QR code or embed on the product page lets shoppers scan and place items life-size in their real environment via augmented reality. This image to AR visualization reduces cart abandonment and boosts sales.",
     metrics: [
       { value: "+94%", label: "Conversion Rate" },
       { value: "−40%", label: "Fewer Returns" },
@@ -29,8 +28,8 @@ const INDUSTRY_DATA = {
   },
   "Food Retail": {
     eyebrow: "SPAR ALREADY WINS",
-    title: "How SPAR brought seasonal promotions to life with scannable AR",
-    desc: "SPAR printed QR codes on packaging and in-store signage. Customers scan and instantly launch interactive 3D AR experiences — animated seasonal characters, gamified loyalty stamps, and prize reveals — all generated from product imagery using ConvertinAr.",
+    title: "How SPAR Brought Seasonal Promotions to Life with Scannable QR AR Experiences",
+    desc: "SPAR uploads product packaging images to ConvertinAr to generate interactive 3D AR models. QR codes printed on packaging and in-store signage let customers scan and instantly launch animated seasonal characters, gamified loyalty rewards, and prize reveals in augmented reality. This picture to 3D to AR activation creates memorable in-store moments.",
     metrics: [
       { value: "86,000", label: "Unique AR Scans" },
       { value: "111 Sec", label: "AR Engagement Time" },
@@ -39,8 +38,8 @@ const INDUSTRY_DATA = {
   },
   "Retail": {
     eyebrow: "OBI SWITZERLAND ALREADY WINS",
-    title: "How OBI Switzerland turned print catalogues into 3D AR showrooms",
-    desc: "OBI added QR codes to their printed catalogue. Customers scan any product photo and a 3D model of the item appears in their home — drill, shelf, or power tool — letting them visualise size, finish, and fit before visiting the store.",
+    title: "How OBI Switzerland Turned Print Catalogues into 3D AR Showrooms",
+    desc: "OBI adds QR codes to printed catalogues linked to ConvertinAr generated 3D models from product photos. Customers scan any item image to see drills, shelves, or power tools appear life-size in their home or workspace via augmented reality. This model to AR experience drives more in-store visits and new customer growth.",
     metrics: [
       { value: "21%", label: "In-Store Redemption" },
       { value: "78%", label: "New Customers via QR" },
@@ -49,22 +48,12 @@ const INDUSTRY_DATA = {
   },
   "Quick Service Restaurants": {
     eyebrow: "KFC ALREADY WINS",
-    title: "How KFC made menu items scan-to-see with AR on every tray liner",
-    desc: "KFC printed QR codes on tray liners and packaging. Customers scan and see 3D AR versions of menu items appear on the table — rotating, steaming, life-size — driving upsells, combo upgrades, and digital loyalty sign-ups at the point of hunger.",
+    title: "How KFC Made Menu Items Come Alive with Scan-to-See AR on Tray Liners",
+    desc: "KFC prints QR codes on tray liners and packaging that trigger ConvertinAr 3D AR models created from menu photos. Customers scan and watch menu items appear steaming, rotating, and life-size on their table in augmented reality. This instant image to AR experience drives upsells, combo upgrades, and loyalty sign-ups.",
     metrics: [
       { value: "46%", label: "QR-to-Lead Conv." },
       { value: "106 Sec", label: "AR Engagement" },
       { value: "95%", label: "Experience Completion" }
-    ]
-  },
-  "FMCG/CPG": {
-    eyebrow: "HEINEKEN SWITZERLAND ALREADY WINS",
-    title: "How HEINEKEN turned bottle labels into scannable 3D brand worlds",
-    desc: "HEINEKEN embedded a QR code on every bottle label. Consumers scan and enter a 3D AR experience — animated brand stories, virtual bars, limited edition collectible models — all triggered from a single image converted into immersive AR by ConvertinAr.",
-    metrics: [
-      { value: "+10%", label: "Brand Meaningfulness" },
-      { value: "30 Mio", label: "AR Tokens Activated" },
-      { value: "95 Sec", label: "Avg. AR Session" }
     ]
   }
 };
@@ -73,8 +62,8 @@ const INDUSTRY_DATA = {
 const USECASE_DATA = {
   "Marketing Campaigns": {
     eyebrow: "GLOBAL BRANDS ALREADY ACTIVATE",
-    title: "Make your ads impossible to scroll past — scan any surface, launch AR",
-    desc: "Turn a product image into a 3D AR model. Embed it behind a QR code on posters, packaging, billboards, and print ads. Customers scan and your product appears life-size in their world — straight from a flyer, a bus shelter, or an Instagram story. AR ads drive 3× longer engagement than static content.",
+    title: "Make Your Ads Impossible to Scroll Past with Scan-to-Launch AR",
+    desc: "Turn product photos or 3D models into photorealistic AR experiences with ConvertinAr. Embed QR codes on posters, packaging, billboards, or digital ads. Customers scan any surface to see your product appear life-size in their world via augmented reality. This QR powered AR marketing delivers 3 times longer engagement than static ads.",
     metrics: [
       { value: "3×", label: "Longer Engagement" },
       { value: "+67%", label: "QR Scan Rate" },
@@ -83,8 +72,8 @@ const USECASE_DATA = {
   },
   "Engagement": {
     eyebrow: "TCHIBO SCHWEIZ ENGAGES",
-    title: "How Tchibo Schweiz turned product packaging into scannable AR experiences",
-    desc: "Tchibo Schweiz added ConvertinAr QR codes to coffee packaging and in-store displays. Customers scan and unlock 3D AR product stories, seasonal animations, and opt-in loyalty moments — all driven from product images converted to interactive 3D models.",
+    title: "How Tchibo Schweiz Turned Product Packaging into Scannable AR Experiences",
+    desc: "Tchibo adds ConvertinAr QR codes to coffee packaging and displays. Customers scan to unlock interactive 3D AR product stories, seasonal animations, and loyalty moments generated from uploaded product images. This picture to AR activation creates emotional connections and higher engagement.",
     metrics: [
       { value: "35,000", label: "Unique AR Scans" },
       { value: "25,200", label: "QR Opt-in Signups" },
@@ -93,8 +82,8 @@ const USECASE_DATA = {
   },
   "Conversion": {
     eyebrow: "AEG ELECTROLUX ALREADY CONVERTS",
-    title: "How AEG let shoppers place appliances in their kitchen before buying",
-    desc: "AEG uploaded product imagery to ConvertinAr — every appliance became a photorealistic 3D AR model. QR codes on shelf tags and e-commerce pages let customers scan and see the washing machine, oven, or fridge life-size in their own home before clicking buy.",
+    title: "How AEG Lets Shoppers Place Appliances in Their Kitchen Before Buying",
+    desc: "AEG uploads product images to ConvertinAr to create photorealistic 3D AR models. QR codes on shelf tags and e-commerce pages let customers scan and visualize washing machines, ovens, or fridges life-size in their own home via augmented reality. This image to AR visualization increases purchases and basket size.",
     metrics: [
       { value: "+44%", label: "AR-Driven Conversion" },
       { value: "+11%", label: "Basket Size" },
@@ -103,8 +92,8 @@ const USECASE_DATA = {
   },
   "Retention": {
     eyebrow: "BIPA ALREADY RETAINS",
-    title: "How BIPA built a loyalty programme customers scan back into every week",
-    desc: "BIPA placed ConvertinAr QR codes on receipts and loyalty cards. Customers scan to unlock 3D AR gamified experiences — spin wheels, product reveals, and collectible 3D brand characters — turning routine purchases into reasons to return.",
+    title: "How BIPA Built a Loyalty Programme Customers Scan Back Into Every Week",
+    desc: "BIPA places ConvertinAr QR codes on receipts and loyalty cards. Customers scan to unlock gamified 3D AR experiences with spin wheels, product reveals, and collectible brand characters. This model to AR journey turns everyday purchases into reasons to return again and again.",
     metrics: [
       { value: "2.4 Mio", label: "AR Sessions Started" },
       { value: "3.7×", label: "Return Visit Rate" },
@@ -113,8 +102,8 @@ const USECASE_DATA = {
   },
   "Education & Training": {
     eyebrow: "LEADING INSTITUTIONS ALREADY TEACH",
-    title: "Scan a textbook page — watch a 3D model appear and come to life",
-    desc: "Upload diagrams, product images, or training materials. ConvertinAr generates interactive 3D AR models students and trainees scan with any device — rotating anatomy models, exploded machine parts, architectural walkthroughs. No app download. No hardware. Just scan and learn.",
+    title: "Scan a Textbook Page and Watch 3D Models Come to Life in AR",
+    desc: "Upload diagrams, product images, or training materials to ConvertinAr to generate interactive 3D AR models. Students and trainees scan QR codes in books or handouts to explore rotating anatomy, exploded machine parts, or architectural walkthroughs in augmented reality. No app or hardware needed, just scan and learn.",
     metrics: [
       { value: "+78%", label: "Knowledge Retention" },
       { value: "4 Min 10s", label: "AR Session Depth" },
@@ -123,8 +112,8 @@ const USECASE_DATA = {
   },
   "Gaming & Interactive Media": {
     eyebrow: "TOP STUDIOS ALREADY ACTIVATE",
-    title: "Scan a card, a box, or a poster — watch game characters step into the real world",
-    desc: "Upload game assets and character art. ConvertinAr converts them into 3D AR models triggered by QR codes on trading cards, packaging, and collectibles. Fans scan and watch characters appear at real scale in their physical space — no app, no glasses, just a phone camera.",
+    title: "Scan a Card, Box, or Poster and Watch Game Characters Step into Reality",
+    desc: "Upload game assets or character art to ConvertinAr to create 3D AR models. QR codes on trading cards, packaging, and posters let fans scan and see characters appear at real scale in their physical space via augmented reality. This instant image to AR activation drives social shares and stronger brand recall.",
     metrics: [
       { value: "5.2×", label: "Social Shares" },
       { value: "148 Sec", label: "Avg. AR Play Time" },
@@ -176,7 +165,7 @@ const VisualMockup = () => (
   </div>
 );
 
-// ─── Card ────────────────────────────────────────────────────────────────────
+// ─── Card Component (unchanged) ─────────────────────────────────────────────
 const Card = ({ i, study, progress, range, targetScale, targetBrightness }: any) => {
   const [activeTab, setActiveTab] = useState(study.pills[0]);
   const currentData = study.data[activeTab];
@@ -295,8 +284,7 @@ export default function CaseStudies() {
             Impactful <span className="gradient-text">Success Stories</span>
           </motion.h2>
           <p className={styles.mainSubtitle}>
-            Upload an image. Get a 3D model. Drop a QR code. Watch customers
-            experience your product in their world — before they ever buy.
+            Upload an image. Get a 3D model. Drop a QR code. Watch customers experience your product in their world before they ever buy.
           </p>
         </div>
 

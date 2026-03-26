@@ -68,9 +68,11 @@ export default function Navbar() {
               </svg>
             </button>
             <div className={styles.dropdownMenu}>
-              <Link href="/products/webar" className={styles.dropdownItem}>WebAR</Link>
-              <Link href="/products/ar-codes" className={styles.dropdownItem}>AR Codes</Link>
-              <Link href="/products/analytics" className={styles.dropdownItem}>Analytics</Link>
+              <Link href="/products/imageto3d" className={styles.dropdownItem}>Image to 3D</Link>
+              <Link href="/products/textto3d" className={styles.dropdownItem}>Text to 3D</Link>
+              <Link href="/products/arscanner" className={styles.dropdownItem}>AR Scanner</Link>
+              <Link href="/products/fileconvertor" className={styles.dropdownItem}>File Convertor</Link>
+              <Link href="/products/arproductvisualization" className={styles.dropdownItem}>AR product visualization</Link>
             </div>
           </div>
 
@@ -82,9 +84,10 @@ export default function Navbar() {
               </svg>
             </button>
             <div className={styles.dropdownMenu}>
-              <Link href="/use-cases/retail" className={styles.dropdownItem}>Retail</Link>
+              <Link href="/use-cases/ecommerce" className={styles.dropdownItem}>Ecommerce</Link>
               <Link href="/use-cases/education" className={styles.dropdownItem}>Education</Link>
               <Link href="/use-cases/marketing" className={styles.dropdownItem}>Marketing</Link>
+              <Link href="/use-cases/gaming" className={styles.dropdownItem}>Gaming</Link>
             </div>
           </div>
 

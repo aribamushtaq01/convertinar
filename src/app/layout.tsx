@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Rubik, Inter } from "next/font/google";
+import { Rubik, Poppins, Inter } from "next/font/google";
 import "./globals.css";
 
 const rubik = Rubik({
   subsets: ["latin"],
   variable: "--font-rubik",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
@@ -28,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${rubik.variable} antialiased`}>
+      <body className={`${inter.variable} ${poppins.variable} antialiased`}>
         {children}
       </body>
     </html>

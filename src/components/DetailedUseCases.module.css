@@ -212,7 +212,7 @@
 
 .featureLabel {
   font-size: clamp(0.875rem, 1.1vw, 1rem);
-  font-weight: 700;
+  font-weight: 400;
   color: #ffffff;
 }
 
@@ -224,7 +224,6 @@
   padding: 12px 22px 12px 30px;
   border-radius: 9999px;
   border: none;
-  font-family: 'Figtree', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   color: #000;
@@ -236,7 +235,7 @@
 
 .exploreBtn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(105, 255, 229, 0.3);
+  box-shadow: 0 8px 32px rgba(43, 249, 7, 0.3);
 }
 
 .btnIcon {

@@ -149,6 +149,7 @@
 .caseDesc {
   font-size: 0.9rem;
   line-height: 1.6;
+  text-align: justify;
   color: #4b5563;
   opacity: 0.85;
 }

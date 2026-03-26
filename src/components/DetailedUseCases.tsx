@@ -9,8 +9,8 @@ const useCases = [
     id: "e-commerce",
     label: "E-Commerce",
     thumbnail: "/e-commerce.png",
-    accentFrom: "#9CB2B3", accentTo: "#D1DADB",
-    subtitleColor: "#C1EBED", btnFrom: "#91BDBF", btnTo: "#C1EBED",
+    accentFrom: "#6ea420", accentTo: " #81bb26",
+    subtitleColor: "#81bb26", btnFrom: "#6ea420", btnTo: "#81bb26",
     subtitle: "Sell more. Return less.",
     features: ["Let shoppers place your product in their own space before they checkout.", "Works on Shopify, WooCommerce, IKEA, and any custom store.", "Brands using AR see up to 94% higher conversion and 40% fewer returns."],
     href: "/use-cases/e-commerce",
@@ -21,8 +21,8 @@ const useCases = [
     id: "marketing-campaigns",
     label: "Marketing Campaigns",
     thumbnail: "/marketing.png",
-    accentFrom: "#00A0FE", accentTo: "#9ADAF3",
-    subtitleColor: "#8FD9FF", btnFrom: "#6DD8FF", btnTo: "#97F6FF",
+    accentFrom: "#6ea420", accentTo: " #81bb26",
+    subtitleColor: "#81bb26", btnFrom: "#6ea420", btnTo: "#81bb26",
     subtitle: "Make your ads impossible to scroll pass.",
     features: ["Turn static visuals into interactive AR experiences with QR codes.", "Launch products straight from flyers, billboards, or social stories.", "AR experiences drive 3x longer engagement than standard content."],
     href: "/use-cases/marketing-campaigns",
@@ -33,8 +33,8 @@ const useCases = [
     id: "education",
     label: "Education",
     thumbnail: "/education.png",
-    accentFrom: "#8D7E3B", accentTo: "#DCC89C",
-    subtitleColor: "#D2B894", btnFrom: "#D2B894", btnTo: "#E8DFB5",
+    accentFrom: "#6ea420", accentTo: " #81bb26",
+    subtitleColor: "#81bb26", btnFrom: "#6ea420", btnTo: "#81bb26",
     subtitle: "Affordable and Accessible 3D Models for educators and students",
     features: ["Turn lessons into interactive experiences.", "With AR, students and trainees can explore 3D models of anatomy, buildings, or product designs.", "Perfect for schools, corporate training, and e-learning platforms."],
     href: "/use-cases/education",
@@ -45,8 +45,8 @@ const useCases = [
     id: "gaming",
     label: "Gaming and Interactive Media",
     thumbnail: "/gaming.png",
-    accentFrom: "#138DA0", accentTo: "#7AE2CF",
-    subtitleColor: "#69FFE5", btnFrom: "#69FFE5", btnTo: "#9EFFEE",
+    accentFrom: "#6ea420", accentTo: " #81bb26",
+    subtitleColor: "#81bb26", btnFrom: "#6ea420", btnTo: "#81bb26",
     subtitle: "Put your characters and assets into the real world.",
     features: ["Convert game assets into QR-based AR experiences with interactive 3D characters and items.", "Turn unboxing into immersive, buzz-worthy AR experiences.", "Increase engagement through AR collectibles and trading cards."],
     href: "/use-cases/game-development",
@@ -57,7 +57,7 @@ const useCases = [
 
 function CheckIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#69FFE5" stroke="none" style={{ flexShrink: 0 }}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#81bb26" stroke="none" style={{ flexShrink: 0 }}>
       <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
     </svg>
   );
