@@ -27,7 +27,7 @@
 
 .grid {
   display: flex;
-  gap: 60px;
+  gap: 50px;
   overflow-x: auto;
   padding: 1.5rem 0.5rem 5rem;
   scrollbar-width: none;

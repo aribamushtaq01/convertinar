@@ -8,6 +8,7 @@ import styles from './Navbar.module.css';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -17,10 +18,10 @@ export default function Navbar() {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > 80 && currentScrollY > lastScrollY.current) {
-        // Scrolling DOWN past threshold → hide
         setIsHidden(true);
+        // Close mobile menu when scrolling down
+        setIsMobileMenuOpen(false);
       } else {
-        // Scrolling UP or near top → show
         setIsHidden(false);
       }
 
@@ -32,6 +33,11 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when clicking a link
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav
       className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}
@@ -42,15 +48,16 @@ export default function Navbar() {
       }}
     >
       <div className={styles.container}>
-        {/* Logo Section */}
+        {/* Logo */}
         <div className={styles.logoContainer}>
-          <Link href="/" className={styles.logo}>
+          <Link href="/" className={styles.logo} onClick={closeMobileMenu}>
             <Image
               src="/logo.png"
               alt="ConvertInAr Logo"
               width={48}
               height={48}
               className={styles.navbarLogo}
+              priority
             />
             <span className={styles.brandName}>
               Convertin<span className="gradient-text">Ar</span>
@@ -58,8 +65,9 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Navigation Menu (Center) */}
+        {/* Desktop Navigation Menu */}
         <div className={styles.navMenu}>
+          {/* ... your existing nav items remain the same ... */}
           <div className={styles.navItem}>
             <button className={styles.dropdownBtn}>
               Products
@@ -68,11 +76,11 @@ export default function Navbar() {
               </svg>
             </button>
             <div className={styles.dropdownMenu}>
-              <Link href="/products/imageto3d" className={styles.dropdownItem}>Image to 3D</Link>
-              <Link href="/products/textto3d" className={styles.dropdownItem}>Text to 3D</Link>
-              <Link href="/products/arscanner" className={styles.dropdownItem}>AR Scanner</Link>
-              <Link href="/products/fileconvertor" className={styles.dropdownItem}>File Convertor</Link>
-              <Link href="/products/arproductvisualization" className={styles.dropdownItem}>AR product visualization</Link>
+              <Link href="/products/imageto3d" className={styles.dropdownItem} onClick={closeMobileMenu}>Image to 3D</Link>
+              <Link href="/products/textto3d" className={styles.dropdownItem} onClick={closeMobileMenu}>Text to 3D</Link>
+              <Link href="/products/arscanner" className={styles.dropdownItem} onClick={closeMobileMenu}>AR Scanner</Link>
+              <Link href="/products/fileconvertor" className={styles.dropdownItem} onClick={closeMobileMenu}>File Convertor</Link>
+              <Link href="/products/arproductvisualization" className={styles.dropdownItem} onClick={closeMobileMenu}>AR product visualization</Link>
             </div>
           </div>
 
@@ -84,28 +92,76 @@ export default function Navbar() {
               </svg>
             </button>
             <div className={styles.dropdownMenu}>
-              <Link href="/use-cases/ecommerce" className={styles.dropdownItem}>Ecommerce</Link>
-              <Link href="/use-cases/education" className={styles.dropdownItem}>Education</Link>
-              <Link href="/use-cases/marketing" className={styles.dropdownItem}>Marketing</Link>
-              <Link href="/use-cases/gaming" className={styles.dropdownItem}>Gaming</Link>
+              <Link href="/use-cases/ecommerce" className={styles.dropdownItem} onClick={closeMobileMenu}>Ecommerce</Link>
+              <Link href="/use-cases/education" className={styles.dropdownItem} onClick={closeMobileMenu}>Education</Link>
+              <Link href="/use-cases/marketing" className={styles.dropdownItem} onClick={closeMobileMenu}>Marketing</Link>
+              <Link href="/use-cases/gaming" className={styles.dropdownItem} onClick={closeMobileMenu}>Gaming</Link>
             </div>
           </div>
 
           <div className={styles.navItem}>
-            <Link href="/pricing" className={styles.navLink}>
+            <Link href="/pricing" className={styles.navLink} onClick={closeMobileMenu}>
               Pricing
             </Link>
           </div>
         </div>
 
-        {/* CTAs (Right) */}
+        {/* Desktop CTAs */}
         <div className={styles.ctaContainer}>
-          <Link href="/login" className={styles.loginBtn}>
+          <Link href="/login" className={styles.loginBtn} onClick={closeMobileMenu}>
             Login
           </Link>
-          <Link href="/create" className={styles.primaryBtn}>
+          <Link href="/create" className={styles.primaryBtn} onClick={closeMobileMenu}>
             Create Ar
           </Link>
+        </div>
+
+        {/* Hamburger Button - Mobile Only */}
+        <button
+          className={styles.hamburger}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className={`${styles.hamburgerLine} ${isMobileMenuOpen ? styles.open : ''}`}></span>
+          <span className={`${styles.hamburgerLine} ${isMobileMenuOpen ? styles.open : ''}`}></span>
+          <span className={`${styles.hamburgerLine} ${isMobileMenuOpen ? styles.open : ''}`}></span>
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.open : ''}`}>
+        <div className={styles.mobileMenuContent}>
+          {/* Products */}
+          <div className={styles.mobileNavSection}>
+            <h4 className={styles.mobileSectionTitle}>Products</h4>
+            <Link href="/products/imageto3d" className={styles.mobileLink} onClick={closeMobileMenu}>Image to 3D</Link>
+            <Link href="/products/textto3d" className={styles.mobileLink} onClick={closeMobileMenu}>Text to 3D</Link>
+            <Link href="/products/arscanner" className={styles.mobileLink} onClick={closeMobileMenu}>AR Scanner</Link>
+            <Link href="/products/fileconvertor" className={styles.mobileLink} onClick={closeMobileMenu}>File Convertor</Link>
+            <Link href="/products/arproductvisualization" className={styles.mobileLink} onClick={closeMobileMenu}>AR Product Visualization</Link>
+          </div>
+
+          {/* Use Cases */}
+          <div className={styles.mobileNavSection}>
+            <h4 className={styles.mobileSectionTitle}>Use Cases</h4>
+            <Link href="/use-cases/ecommerce" className={styles.mobileLink} onClick={closeMobileMenu}>Ecommerce</Link>
+            <Link href="/use-cases/education" className={styles.mobileLink} onClick={closeMobileMenu}>Education</Link>
+            <Link href="/use-cases/marketing" className={styles.mobileLink} onClick={closeMobileMenu}>Marketing</Link>
+            <Link href="/use-cases/gaming" className={styles.mobileLink} onClick={closeMobileMenu}>Gaming</Link>
+          </div>
+
+          <Link href="/pricing" className={styles.mobileLink} onClick={closeMobileMenu}>
+            Pricing
+          </Link>
+
+          <div className={styles.mobileCta}>
+            <Link href="/login" className={styles.mobileLoginBtn} onClick={closeMobileMenu}>
+              Login
+            </Link>
+            <Link href="/create" className={styles.mobilePrimaryBtn} onClick={closeMobileMenu}>
+              Create Ar
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

@@ -56,14 +56,14 @@ export default function UseCases() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
             >
-              <div 
-                className={styles.cardBg} 
+              <div
+                className={styles.cardBg}
                 style={{ background: `linear-gradient(to bottom, ${useCase.accentFrom}, ${useCase.accentTo})` }}
               />
-              <img 
-                src={useCase.image} 
-                alt={useCase.title} 
-                className={styles.cardImage} 
+              <img
+                src={useCase.image}
+                alt={useCase.title}
+                className={styles.cardImage}
               />
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>{useCase.title}</h3>

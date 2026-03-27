@@ -12,7 +12,7 @@ export default function Hero() {
       <div className={styles.container}>
         {/* Left Column: Content */}
         <div className={styles.contentColumn}>
-          <motion.h1 
+          <motion.h1
             className={styles.heading}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -20,6 +20,7 @@ export default function Hero() {
           >
             Create and experience <span className="gradient-text">Ar</span>
           </motion.h1>
+
           <p className={styles.subheading}>
             One platform to create and share immersive 3D/AR experiences. No app required.
           </p>
@@ -34,7 +35,7 @@ export default function Hero() {
           </div>
 
           <div className={styles.trustedBy}>
-            <p className={styles.trustedLabel}></p>
+            <p className={styles.trustedLabel}>Trusted by teams at</p>
             <div className={styles.trustedLogos}>
               <div className={styles.logoCircle}>A</div>
               <div className={styles.logoCircle}>B</div>
@@ -46,11 +47,11 @@ export default function Hero() {
           <div className={styles.featuresList}>
             <div className={styles.featureItem}>
               <div className={styles.featureIcon}>✓</div>
-              <span>No 3D designer</span>
+              <span>No 3D designer needed</span>
             </div>
             <div className={styles.featureItem}>
               <div className={styles.featureIcon}>✓</div>
-              <span>No developer</span>
+              <span>No developer needed</span>
             </div>
             <div className={styles.featureItem}>
               <div className={styles.featureIcon}>✓</div>
@@ -62,10 +63,8 @@ export default function Hero() {
         {/* Right Column: Visuals */}
         <div className={styles.visualColumn}>
           <div className={styles.visualWrapper}>
-            {/* abstract representation of QR code to AR experience without explicit box boundry */}
-
             <div className={styles.arMockupContainer}>
-              {/* QR Code element floating */}
+              {/* Floating QR Code */}
               <div className={styles.qrElement}>
                 <div className={styles.qrCodeWrapper}>
                   <Image
@@ -74,6 +73,7 @@ export default function Hero() {
                     width={180}
                     height={180}
                     className={styles.qrImage}
+                    priority
                   />
                   <div className={styles.qrScannerLine}></div>
                 </div>
@@ -94,10 +94,8 @@ export default function Hero() {
                 </div>
                 <div className={styles.phoneNotch}></div>
               </div>
-
             </div>
           </div>
-          {/* Decorative glows */}
           <div className={styles.glowPrimary}></div>
         </div>
       </div>

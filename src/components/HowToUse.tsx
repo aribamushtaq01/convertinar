@@ -145,12 +145,12 @@ export default function HowToUse() {
         <div className={styles.paginationWrapper}>
           <div className={styles.paginationSticky}>
             {[1, 2, 3].map((num) => (
-              <div 
-                key={num} 
+              <div
+                key={num}
                 className={`${styles.paginationItem} ${activeStep === num ? styles.active : ''}`}
                 onClick={() => {
-                   const element = document.getElementById(`step-${num}`);
-                   element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  const element = document.getElementById(`step-${num}`);
+                  element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }}
               >
                 {num < 10 ? `0${num}` : num}
@@ -202,7 +202,7 @@ export default function HowToUse() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className={styles.stepTextContainer}>
                   <div className={styles.mobileStageNumber}>{stage.number}</div>
                   <motion.h2
