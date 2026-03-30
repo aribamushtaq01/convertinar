@@ -1,0 +1,380 @@
+.section {
+  padding: 4rem 0;
+  background: #ffffff;
+  height: 90vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 3rem;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.paginationWrapper {
+  position: absolute;
+  right: 5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: auto;
+  pointer-events: none;
+  z-index: 100;
+  display: block;
+}
+
+@media (max-width: 1280px) {
+  .paginationWrapper {
+    right: 2rem;
+  }
+}
+
+.paginationSticky {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.paginationItem {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-rubik), sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.paginationItem:hover {
+  color: #888;
+}
+
+.paginationItem.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+.sectionHeader {
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-rubik), sans-serif;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1.2rem;
+  color: var(--primary);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  padding-left: 20px;
+  /* Slight padding to prevent left shadow clipping */
+  scrollbar-width: none;
+  /* Hide scrollbar Firefox */
+}
+
+.scrollArea::-webkit-scrollbar {
+  display: none;
+  /* Hide scrollbar Chrome/Safari */
+}
+
+.stagesList {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepLayout {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  height: 100%;
+  min-height: 500px;
+  scroll-snap-align: center;
+  opacity: 0.3;
+  transition: opacity 0.4s ease;
+}
+
+.stepActive {
+  opacity: 1;
+}
+
+.stepVisualContainer {
+  flex: 1.2;
+}
+
+.stepTextContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 5rem;
+  /* padding to avoid overlapping the sticky navigation bar */
+}
+
+.stepMainTitle {
+  font-family: var(--font-rubik);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.visualCard {
+  background: #fdfdfd;
+  border-radius: 32px;
+  height: 420px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stepLayout:hover .visualCard {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--primary);
+  box-shadow: 0 30px 60px rgba(129, 187, 38, 0.1);
+}
+
+.cardHeader {
+  padding: 0.8rem 1.2rem;
+  background: #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e5e7eb;
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  background: #fff;
+  position: relative;
+}
+
+/* --- HIDE DEFAULT INPUT --- */
+.hiddenInput {
+  display: none;
+}
+
+.uploadDropzone {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  cursor: pointer;
+  padding: 2rem;
+  transition: background 0.3s ease;
+}
+
+.uploadDropzone.dragging {
+  background: rgba(129, 187, 38, 0.05);
+}
+
+.dropCircle {
+  width: 60px;
+  height: 60px;
+  background: #f3f4f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  transition: all 0.3s ease;
+}
+
+.uploadDropzone:hover .dropCircle {
+  background: rgba(129, 187, 38, 0.1);
+  color: var(--primary);
+}
+
+.uploadStatus {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.uploadHint {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* Loader for AI Processing */
+.loader {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Rest of your animations (scan, rotate3D) remain the same */
+.qrPreview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.qrInner {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid #f0f0f0;
+}
+
+.scanLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  opacity: 0.5;
+  animation: scan 3s infinite linear;
+}
+
+.arExperience {
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arVisual {
+  width: 90px;
+  height: 90px;
+  background: var(--primary);
+  border-radius: 20px;
+  animation: rotate3D 5s infinite linear;
+}
+
+@keyframes scan {
+  0% {
+    top: 10%;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 90%;
+    opacity: 0;
+  }
+}
+
+@keyframes rotate3D {
+  from {
+    transform: perspective(800px) rotateY(0deg) rotateX(10deg);
+  }
+
+  to {
+    transform: perspective(800px) rotateY(360deg) rotateX(10deg);
+  }
+}
+
+.mobileStageNumber {
+  display: none;
+}
+
+.stageDesc {
+  font-family: var(--font-inter);
+  color: #4b5563;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 2rem;
+}
+
+.tryFreeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-inter);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--primary);
+  background: white;
+  border: 2px solid var(--primary);
+  padding: 12px 24px;
+  border-radius: 9999px;
+  cursor: pointer;
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.tryFreeBtn:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(129, 187, 38, 0.2);
+}
+
+@media (max-width: 968px) {
+  .paginationWrapper {
+    display: none;
+  }
+
+  .stepLayout {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .stagesList {
+    gap: 6rem;
+  }
+}
