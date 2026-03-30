@@ -225,7 +225,7 @@ export default function HowToUse() {
         <div className="htw-mobile-scroll bg-white relative" ref={sectionRef as any}>
 
           {/* Sticky step dots */}
-          <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3 pointer-events-none">
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3 pointer-events-none">
             {[1, 2, 3].map((num) => (
               <div
                 key={num}
