@@ -16,11 +16,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <UseCases />
+        <DetailedUseCases />
         <HowToUse />
         <Showcase />
         <UseAnywhere />
-        <DetailedUseCases />
         <CaseStudies />
         {/* <FAQ /> */}
         <AppPromotion />

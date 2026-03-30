@@ -13,7 +13,7 @@ import 'swiper/css/effect-coverflow';
 // No pagination CSS import needed anymore
 
 const SHOWCASE_SLIDES = [
-  { id: 1, video: "https://customer-p5gbjpucwq617o8d.cloudflarestream.com/e08d1464721f860475b94fffafc0dfe8/downloads/default.mp4", alt: "Retail AR Experience" },
+  { id: 1, Image: "/shoes-UC.gif", alt: "Retail AR Experience" },
   { id: 2, video: "https://customer-p5gbjpucwq617o8d.cloudflarestream.com/4406225dab25d749653d7119db723f9d/downloads/default.mp4", alt: "Product Visualization AR" },
   { id: 3, video: "https://customer-p5gbjpucwq617o8d.cloudflarestream.com/7d1faf3b16f3fb0eb394c0dbc821f067/downloads/default.mp4", alt: "Interactive Food AR" },
   { id: 4, video: "https://customer-p5gbjpucwq617o8d.cloudflarestream.com/11aeffaff9c4032117545bb96bf28664/downloads/default.mp4", alt: "Architecture & Design AR" },
@@ -178,7 +178,15 @@ export default function Showcase() {
           >
             {SHOWCASE_SLIDES.map((slide) => (
               <SwiperSlide key={slide.id}>
-                <video src={slide.video} autoPlay muted loop playsInline />
+                {slide.video ? (
+                  <video src={slide.video} autoPlay muted loop playsInline />
+                ) : (
+                  <img
+                    src={slide.Image}
+                    alt={slide.alt}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </SwiperSlide>
             ))}
           </Swiper>

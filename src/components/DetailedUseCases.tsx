@@ -14,7 +14,7 @@ const useCases = [
     subtitle: "Sell more. Return less.",
     features: ["Let shoppers place your product in their own space before they checkout.", "Works on Shopify, WooCommerce, IKEA, and any custom store.", "Brands using AR see up to 94% higher conversion and 40% fewer returns."],
     href: "/use-cases/e-commerce",
-    image: "https://cdn.meshy.ai/ti_w:1200,q:75/landing-assets/home/meshy-use-case-hero-film-production.webp",
+    image: "/E-commerce usecase.gif",
     video: null,
   },
   {
@@ -26,7 +26,7 @@ const useCases = [
     subtitle: "Make your ads impossible to scroll pass.",
     features: ["Turn static visuals into interactive AR experiences with QR codes.", "Launch products straight from flyers, billboards, or social stories.", "AR experiences drive 3x longer engagement than standard content."],
     href: "/use-cases/marketing-campaigns",
-    image: "https://cdn.meshy.ai/ti_w:1200,q:75/landing-assets/home/meshy-use-case-hero-product-design.webp",
+    image: "/Marketing usecase.gif",
     video: null,
   },
   {
@@ -38,7 +38,7 @@ const useCases = [
     subtitle: "Affordable and Accessible 3D Models for educators and students",
     features: ["Turn lessons into interactive experiences.", "With AR, students and trainees can explore 3D models of anatomy, buildings, or product designs.", "Perfect for schools, corporate training, and e-learning platforms."],
     href: "/use-cases/education",
-    image: "https://cdn.meshy.ai/ti_w:1200,q:75/landing-assets/home/meshy-use-case-hero-education.webp",
+    image: "/Education usecase.gif",
     video: null,
   },
   {

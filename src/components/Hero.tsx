@@ -103,53 +103,13 @@ export default function Hero() {
               >
                 Create Ar
               </Link>
-              <Link
-                href="/demo"
-                className="
-                  inline-block no-underline
-                  px-[2.6rem] py-[1.1rem] rounded-full
-                  text-[1.02rem] font-medium tracking-[0.02em]
-                  bg-transparent text-[var(--foreground)]
-                  border-[1.5px] border-[var(--border,rgba(0,0,0,0.1))]
-                  transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
-                  hover:-translate-y-1 hover:bg-black/[0.03]
-                  hover:border-[var(--primary)]
-                  max-[640px]:w-full max-[640px]:text-center
-                  max-[640px]:px-6 max-[640px]:py-4
-                "
-              >
-                Explore Solutions
-              </Link>
-            </div>
 
-            {/* Trusted By */}
-            <div className="mt-2">
-              <p className="text-[0.75rem] font-semibold text-[var(--text-muted)] uppercase tracking-[0.8px] mb-3">
-                Trusted by teams at
-              </p>
-              <div className="flex gap-[0.9rem]">
-                {['A', 'B', 'C', 'D'].map((l) => (
-                  <div
-                    key={l}
-                    className="
-                      w-[34px] h-[34px] rounded-full flex items-center justify-center
-                      border border-[var(--border,rgba(0,0,0,0.1))] bg-white
-                      font-semibold text-sm text-[var(--text-muted)]
-                      shadow-[0_2px_8px_rgba(0,0,0,0.05)]
-                      transition-all duration-200
-                      hover:-translate-y-0.5 hover:border-[var(--primary)]
-                    "
-                  >
-                    {l}
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Features */}
             <div className="flex flex-col gap-[1.4rem] mt-2 max-[640px]:gap-4">
               {[
-                'No 3D designer needed',
+                'Create under 3 minutes',
                 'No developer needed',
                 'No complicated setup',
               ].map((feat) => (
