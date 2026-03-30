@@ -233,20 +233,18 @@ export default function Navbar() {
 
           {/* ── Pricing — styled as a section label + single link to match the accordion items ── */}
           <div>
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.6px] text-[var(--text-muted)] py-1 mb-1">
-              Pricing
-            </p>
             <Link
               href="/pricing"
               onClick={closeMobileMenu}
               className="
-                block text-[var(--foreground)] text-[1.05rem] font-medium
-                px-4 py-3 rounded-xl no-underline
-                hover:bg-[rgba(129,187,38,0.07)] hover:text-[var(--primary)]
-                transition-all duration-200
-              "
+      w-full flex items-center justify-between
+      text-[0.7rem] font-semibold uppercase tracking-[0.6px]
+      text-[var(--text-muted)] hover:text-[var(--primary)]
+      py-1 no-underline
+      transition-colors duration-200
+    "
             >
-              View Pricing
+              Pricing
             </Link>
           </div>
 

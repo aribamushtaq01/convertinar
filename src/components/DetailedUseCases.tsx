@@ -50,8 +50,8 @@ const useCases = [
     subtitle: "Put your characters and assets into the real world.",
     features: ["Convert game assets into QR-based AR experiences with interactive 3D characters and items.", "Turn unboxing into immersive, buzz-worthy AR experiences.", "Increase engagement through AR collectibles and trading cards."],
     href: "/use-cases/game-development",
-    image: null,
-    video: "https://cdn.meshy.ai/landing-assets/home/meshy-use-case-hero-game-development.webm",
+    image: "/Gaming usecase gif.gif",
+    video: null,
   },
 ];
 
