@@ -2,13 +2,15 @@
 
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, EffectCoverflow, Autoplay, Pagination } from 'swiper/modules';
+import { Navigation, EffectCoverflow, Autoplay } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 import { motion } from 'framer-motion';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
+
+// No pagination CSS import needed anymore
 
 const SHOWCASE_SLIDES = [
   { id: 1, video: "https://customer-p5gbjpucwq617o8d.cloudflarestream.com/e08d1464721f860475b94fffafc0dfe8/downloads/default.mp4", alt: "Retail AR Experience" },
@@ -21,6 +23,8 @@ const SHOWCASE_SLIDES = [
 export default function Showcase() {
   const [isBegin, setIsBegin] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const swiperRef = React.useRef<SwiperType | null>(null);
 
   return (
     <>
@@ -55,36 +59,6 @@ export default function Showcase() {
           height: 100%;
           object-fit: cover;
           pointer-events: none;
-        }
-
-        /* Kill the internal pagination entirely */
-        .showcase-swiper .swiper-pagination {
-          display: none !important;
-        }
-
-        /* External pagination */
-        #showcase-pagination {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 6px;
-          margin-top: 28px;
-        }
-
-        #showcase-pagination .swiper-pagination-bullet {
-          width: 8px;
-          height: 8px;
-          border-radius: 9999px;
-          background: rgba(255, 255, 255, 0.25);
-          opacity: 1;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          display: inline-block;
-        }
-
-        #showcase-pagination .swiper-pagination-bullet-active {
-          background: var(--primary);
-          width: 24px;
         }
 
         @media (max-width: 768px) {
@@ -137,8 +111,9 @@ export default function Showcase() {
           {/* Prev — desktop only */}
           <button
             id="showcase-prev"
+            onClick={() => swiperRef.current?.slidePrev()}
             className={`
-              absolute left-4 top-1/2 -translate-y-1/2 z-10
+              absolute left-4 top-[calc(50%-20px)] -translate-y-1/2 z-10
               w-11 h-11 rounded-full bg-[#007b7f] text-white
               flex items-center justify-center
               shadow-[0_8px_15px_rgba(0,123,127,0.2)]
@@ -156,8 +131,9 @@ export default function Showcase() {
           {/* Next — desktop only */}
           <button
             id="showcase-next"
+            onClick={() => swiperRef.current?.slideNext()}
             className={`
-              absolute right-4 top-1/2 -translate-y-1/2 z-10
+              absolute right-4 top-[calc(50%-20px)] -translate-y-1/2 z-10
               w-11 h-11 rounded-full bg-[#007b7f] text-white
               flex items-center justify-center
               shadow-[0_8px_15px_rgba(0,123,127,0.2)]
@@ -172,8 +148,9 @@ export default function Showcase() {
             </svg>
           </button>
 
+          {/* Swiper — NO Pagination module */}
           <Swiper
-            modules={[Navigation, EffectCoverflow, Autoplay, Pagination]}
+            modules={[Navigation, EffectCoverflow, Autoplay]}
             effect="coverflow"
             grabCursor={true}
             centeredSlides={true}
@@ -186,22 +163,16 @@ export default function Showcase() {
               modifier: 2,
               slideShadows: true,
             }}
-            navigation={{
-              prevEl: '#showcase-prev',
-              nextEl: '#showcase-next',
-            }}
             autoplay={{
               delay: 3500,
               disableOnInteraction: false,
             }}
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-              el: '#showcase-pagination', // 👈 point to external element
-            }}
+            onSwiper={(swiper) => { swiperRef.current = swiper; }}
             onSlideChange={(swiper) => {
               setIsBegin(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
+              // For loop mode, use realIndex
+              setActiveIndex(swiper.realIndex);
             }}
             className="showcase-swiper"
           >
@@ -211,9 +182,22 @@ export default function Showcase() {
               </SwiperSlide>
             ))}
           </Swiper>
+        </div>
 
-          {/* External pagination — lives OUTSIDE overflow:visible swiper */}
-          <div id="showcase-pagination" />
+        {/* ✅ Manual pagination — completely outside Swiper, in normal flow */}
+        <div className="flex justify-center items-center gap-2 mt-7">
+          {SHOWCASE_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => swiperRef.current?.slideToLoop(i)}
+              className="transition-all duration-300 rounded-full"
+              style={{
+                width: activeIndex === i ? '24px' : '8px',
+                height: '8px',
+                background: activeIndex === i ? 'var(--primary)' : 'rgba(255,255,255,0.25)',
+              }}
+            />
+          ))}
         </div>
 
       </section>
