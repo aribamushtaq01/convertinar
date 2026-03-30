@@ -25,7 +25,6 @@ export default function Showcase() {
   return (
     <>
       <style>{`
-        /* Grid overlay pseudo-element — can't do ::after in Tailwind */
         .showcase-grid-overlay::after {
           content: '';
           position: absolute;
@@ -33,9 +32,8 @@ export default function Showcase() {
           background: radial-gradient(circle at center, rgba(129, 187, 38, 0.1) 0%, transparent 70%);
         }
 
-        /* Swiper overrides */
         .showcase-swiper {
-          padding: 40px 0 !important;
+          padding: 40px 0 0 !important;
           overflow: visible !important;
         }
 
@@ -59,13 +57,34 @@ export default function Showcase() {
           pointer-events: none;
         }
 
-        /* Pagination dots */
-        .showcase-swiper .swiper-pagination-bullet {
-          background: rgba(255,255,255,0.4);
-          opacity: 1;
+        /* Kill the internal pagination entirely */
+        .showcase-swiper .swiper-pagination {
+          display: none !important;
         }
-        .showcase-swiper .swiper-pagination-bullet-active {
+
+        /* External pagination */
+        #showcase-pagination {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 6px;
+          margin-top: 28px;
+        }
+
+        #showcase-pagination .swiper-pagination-bullet {
+          width: 8px;
+          height: 8px;
+          border-radius: 9999px;
+          background: rgba(255, 255, 255, 0.25);
+          opacity: 1;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: inline-block;
+        }
+
+        #showcase-pagination .swiper-pagination-bullet-active {
           background: var(--primary);
+          width: 24px;
         }
 
         @media (max-width: 768px) {
@@ -87,20 +106,17 @@ export default function Showcase() {
         }
       `}</style>
 
-      <section className="
-        relative py-16 bg-[#050505] overflow-hidden
-      ">
+      <section className="relative py-16 bg-[#050505] overflow-hidden">
+
         {/* Grid overlay */}
-        <div
-          className="
-            showcase-grid-overlay
-            absolute inset-0 pointer-events-none
-            [background-image:linear-gradient(rgba(129,187,38,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(129,187,38,0.08)_1px,transparent_1px)]
-            [background-size:60px_60px]
-            [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]
-            [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]
-          "
-        />
+        <div className="
+          showcase-grid-overlay
+          absolute inset-0 pointer-events-none
+          [background-image:linear-gradient(rgba(129,187,38,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(129,187,38,0.08)_1px,transparent_1px)]
+          [background-size:60px_60px]
+          [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]
+          [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]
+        " />
 
         {/* Title */}
         <div className="relative z-[2] text-center mb-8 px-8">
@@ -118,13 +134,12 @@ export default function Showcase() {
         {/* Swiper wrapper */}
         <div className="relative max-w-[1200px] mx-auto px-[100px] max-[768px]:px-6">
 
-          {/* Prev button — hidden on mobile */}
+          {/* Prev — desktop only */}
           <button
             id="showcase-prev"
             className={`
               absolute left-4 top-1/2 -translate-y-1/2 z-10
-              w-11 h-11 rounded-full
-              bg-[#007b7f] text-white
+              w-11 h-11 rounded-full bg-[#007b7f] text-white
               flex items-center justify-center
               shadow-[0_8px_15px_rgba(0,123,127,0.2)]
               transition-all duration-300
@@ -138,13 +153,12 @@ export default function Showcase() {
             </svg>
           </button>
 
-          {/* Next button — hidden on mobile */}
+          {/* Next — desktop only */}
           <button
             id="showcase-next"
             className={`
               absolute right-4 top-1/2 -translate-y-1/2 z-10
-              w-11 h-11 rounded-full
-              bg-[#007b7f] text-white
+              w-11 h-11 rounded-full bg-[#007b7f] text-white
               flex items-center justify-center
               shadow-[0_8px_15px_rgba(0,123,127,0.2)]
               transition-all duration-300
@@ -183,6 +197,7 @@ export default function Showcase() {
             pagination={{
               clickable: true,
               dynamicBullets: true,
+              el: '#showcase-pagination', // 👈 point to external element
             }}
             onSlideChange={(swiper) => {
               setIsBegin(swiper.isBeginning);
@@ -192,17 +207,15 @@ export default function Showcase() {
           >
             {SHOWCASE_SLIDES.map((slide) => (
               <SwiperSlide key={slide.id}>
-                <video
-                  src={slide.video}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
+                <video src={slide.video} autoPlay muted loop playsInline />
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* External pagination — lives OUTSIDE overflow:visible swiper */}
+          <div id="showcase-pagination" />
         </div>
+
       </section>
     </>
   );
