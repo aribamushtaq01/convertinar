@@ -14,7 +14,7 @@ const useCases = [
     subtitle: "Sell more. Return less.",
     features: ["Let shoppers place your product in their own space before they checkout.", "Works on Shopify, WooCommerce, IKEA, and any custom store.", "Brands using AR see up to 94% higher conversion and 40% fewer returns."],
     href: "/use-cases/e-commerce",
-    image: "/E-commerce usecase.gif",
+    image: null,
     video: null,
   },
   {
@@ -26,7 +26,7 @@ const useCases = [
     subtitle: "Make your ads impossible to scroll pass.",
     features: ["Turn static visuals into interactive AR experiences with QR codes.", "Launch products straight from flyers, billboards, or social stories.", "AR experiences drive 3x longer engagement than standard content."],
     href: "/use-cases/marketing-campaigns",
-    image: "/Marketing usecase.gif",
+    image: null,
     video: null,
   },
   {
@@ -38,7 +38,7 @@ const useCases = [
     subtitle: "Affordable and Accessible 3D Models for educators and students",
     features: ["Turn lessons into interactive experiences.", "With AR, students and trainees can explore 3D models of anatomy, buildings, or product designs.", "Perfect for schools, corporate training, and e-learning platforms."],
     href: "/use-cases/education",
-    image: "/Education usecase.gif",
+    image: null,
     video: null,
   },
   {
@@ -50,7 +50,7 @@ const useCases = [
     subtitle: "Put your characters and assets into the real world.",
     features: ["Convert game assets into QR-based AR experiences with interactive 3D characters and items.", "Turn unboxing into immersive, buzz-worthy AR experiences.", "Increase engagement through AR collectibles and trading cards."],
     href: "/use-cases/game-development",
-    image: "/Gaming usecase gif.gif",
+    image: null,
     video: null,
   },
 ];
