@@ -215,19 +215,19 @@ export default function DetailedUseCases() {
 
         {/* Title */}
         <motion.h2
-          className="text-[2.2rem] md:text-[2.6rem] font-semibold text-center text-white mb-6 md:mb-8 tracking-[-0.03em]"
+          className="text-[2.2rem] md:text-[2.6rem] font-semibold text-center text-white mb-6 md:mb-12 tracking-[-0.03em]"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          Who Uses <span className="gradient-text">ConvertInAr</span>
+          Who Uses <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6ea420] to-[#81bb26]">ConvertInAr</span>
         </motion.h2>
 
         {/* ── MOBILE: horizontal snap-scroll cards ── */}
-        <div className="md:hidden mb-6 -mx-4">
+        <div className="md:hidden mb-8 -mx-4">
           <div
-            className="flex gap-3 overflow-x-auto px-4 pb-3 [scroll-snap-type:x_mandatory] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-4 overflow-x-auto px-6 pb-4 [scroll-snap-type:x_mandatory] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {useCases.map((uc, i) => {
               const isActive = i === activeDisplayIndex;
@@ -235,35 +235,35 @@ export default function DetailedUseCases() {
                 <button
                   key={uc.id}
                   onClick={() => triggerTransition(i)}
-                  className="relative flex-shrink-0 w-[52vw] h-[200px] rounded-[24px] border-none p-0 cursor-pointer touch-manipulation overflow-hidden transition-all duration-400 [scroll-snap-align:start]"
+                  className="relative flex-shrink-0 w-[48vw] h-[160px] rounded-[20px] bg-transparent border-none p-0 cursor-pointer touch-manipulation overflow-visible transition-all duration-400 [scroll-snap-align:center]"
                   style={{
-                    background: `linear-gradient(to bottom, ${uc.accentFrom}, ${uc.accentTo})`,
-                    opacity: isActive ? 1 : 0.55,
-                    transform: isActive ? 'scale(1)' : 'scale(0.95)',
-                    boxShadow: isActive ? `0 16px 40px ${uc.accentFrom}66` : 'none',
+                    opacity: isActive ? 1 : 0.5,
+                    transform: isActive ? 'scale(1)' : 'scale(0.9)',
                   }}
                 >
-                  {/* Thumbnail image */}
+                  {/* Thumbnail image (No background block) */}
                   <img
                     src={uc.thumbnail}
                     alt={uc.label}
-                    className="absolute inset-x-0 top-0 w-full object-contain pointer-events-none transition-all duration-400"
+                    className="absolute inset-x-0 bottom-8 w-full object-contain pointer-events-none transition-all duration-400"
                     style={{
-                      height: 'calc(100% - 2.4rem)',
-                      transform: `scale(${uc.thumbScale * (isActive ? 0.9 : 0.78)})`,
+                      height: 'calc(100% - 2rem)',
+                      transform: `scale(${uc.thumbScale * (isActive ? 1.05 : 0.9)})`,
                       transformOrigin: 'center bottom',
+                      filter: isActive ? `drop-shadow(0 12px 24px ${uc.accentFrom}66)` : 'none'
                     }}
                   />
-                  {/* Label bar */}
-                  <div className="absolute bottom-0 inset-x-0 h-10 flex items-center justify-center px-3 bg-black/20 backdrop-blur-sm">
-                    <span className="text-[0.78rem] font-bold text-white text-center leading-none whitespace-nowrap [text-shadow:0_2px_8px_rgba(0,0,0,0.5)]">
+                  {/* Label Pill */}
+                  <div className="absolute bottom-0 inset-x-0 flex items-center justify-center">
+                    <span
+                      className={`text-[0.75rem] font-bold text-center leading-none whitespace-nowrap px-4 py-2 rounded-full backdrop-blur-md transition-all duration-300 ${isActive
+                          ? 'bg-white/10 text-white border border-white/20 shadow-lg'
+                          : 'bg-black/40 text-white/70 border border-transparent'
+                        }`}
+                    >
                       {uc.tabLabel}
                     </span>
                   </div>
-                  {/* Active ring */}
-                  {isActive && (
-                    <div className="absolute inset-0 rounded-[24px] border-2 border-white/60 pointer-events-none" />
-                  )}
                 </button>
               );
             })}
@@ -280,11 +280,11 @@ export default function DetailedUseCases() {
           </div>
         </div>
 
-        {/* ── DESKTOP: original row thumbnails ── */}
-        <div className="hidden md:flex justify-center mb-8 w-full">
+        {/* ── DESKTOP: clear row thumbnails ── */}
+        <div className="hidden md:flex justify-center mb-12 w-full">
           <div
             ref={tabsRef}
-            className="flex md:w-auto md:gap-10 overflow-x-auto md:overflow-visible pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex md:w-auto md:gap-8 lg:gap-12 overflow-x-auto md:overflow-visible pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {useCases.map((uc, i) => {
               const isActive = i === activeDisplayIndex;
@@ -293,28 +293,35 @@ export default function DetailedUseCases() {
                   key={uc.id}
                   onMouseEnter={() => triggerTransition(i)}
                   onClick={() => triggerTransition(i)}
-                  className="relative flex flex-col-reverse items-center text-center cursor-pointer overflow-visible flex-shrink-0 w-[180px] lg:w-[200px] h-[220px] lg:h-[230px] border-none bg-transparent p-0 transition-all duration-300"
+                  className="relative flex flex-col-reverse items-center justify-start text-center cursor-pointer overflow-visible flex-shrink-0 w-[160px] lg:w-[180px] h-[200px] lg:h-[220px] border-none bg-transparent p-0 transition-all duration-300"
+                  style={{ opacity: isActive ? 1 : 0.5 }}
                 >
-                  <div
-                    className="absolute bottom-0 left-0 w-full rounded-[32px] lg:rounded-[40px] -z-[1] transition-all duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
-                    style={{
-                      background: `linear-gradient(to bottom, ${uc.accentFrom}, ${uc.accentTo})`,
-                      height: isActive ? '100%' : '38px',
-                      opacity: isActive ? 1 : 0.5,
-                    }}
-                  />
+                  {/* Removed background colored div */}
+
                   <img
                     src={uc.thumbnail}
                     alt={uc.label}
                     className="absolute inset-x-0 top-0 w-full pointer-events-none transition-all duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)] object-contain"
                     style={{
-                      height: 'calc(100% - 1.8rem)',
-                      transform: isActive ? `scale(${uc.thumbScale * 0.88}) translateY(-4px)` : `scale(${uc.thumbScale * 0.68})`,
-                      transformOrigin: 'center',
+                      height: 'calc(100% - 2.5rem)',
+                      transform: isActive ? `scale(${uc.thumbScale * 1.05}) translateY(-8px)` : `scale(${uc.thumbScale * 0.85})`,
+                      transformOrigin: 'center bottom',
+                      filter: isActive ? `drop-shadow(0 20px 30px ${uc.accentFrom}55)` : 'none'
                     }}
                   />
-                  <div className="relative z-10 w-full px-2 flex items-center justify-center mb-4">
-                    <span className="text-[0.88rem] font-bold text-white text-center leading-none whitespace-nowrap [text-shadow:0_4px_12px_rgba(0,0,0,0.6)]">{uc.tabLabel}</span>
+
+                  {/* Text Container */}
+                  <div className="relative z-10 w-full flex flex-col items-center justify-end h-10 mb-2">
+                    <span
+                      className={`text-[0.9rem] lg:text-[1rem] font-bold text-center leading-none whitespace-nowrap transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/70'}`}
+                    >
+                      {uc.tabLabel}
+                    </span>
+                    {/* Active Indicator Underline */}
+                    <div
+                      className={`h-1 rounded-full mt-2 transition-all duration-300 ${isActive ? 'w-8' : 'w-0'}`}
+                      style={{ backgroundColor: uc.accentFrom }}
+                    />
                   </div>
                 </button>
               );
@@ -323,12 +330,12 @@ export default function DetailedUseCases() {
         </div>
 
         {/* Panel */}
-        <div className="relative min-h-[300px] md:min-h-[380px]">
+        <div className="relative min-h-[420px] md:min-h-[380px]">
 
           {/* Exiting panel */}
           {exitingCase && (
             <div
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 px-0 md:px-6 items-center absolute inset-0 opacity-0 pointer-events-none -translate-y-2 transition-all duration-[450ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 px-0 md:px-6 items-center absolute inset-0 opacity-0 pointer-events-none -translate-y-4 transition-all duration-[450ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
             >
               <PanelContent uc={exitingCase} videoRef={(el) => { videoRefs.current[visibleIndex] = el; }} />
             </div>
