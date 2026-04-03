@@ -224,11 +224,67 @@ export default function DetailedUseCases() {
           Who Uses <span className="gradient-text">ConvertInAr</span>
         </motion.h2>
 
-        {/* Tabs — on mobile: equally divided, no scroll; on desktop: centered row */}
-        <div className="flex justify-center mb-6 md:mb-8 w-full">
+        {/* ── MOBILE: horizontal snap-scroll cards ── */}
+        <div className="md:hidden mb-6 -mx-4">
+          <div
+            className="flex gap-3 overflow-x-auto px-4 pb-3 [scroll-snap-type:x_mandatory] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {useCases.map((uc, i) => {
+              const isActive = i === activeDisplayIndex;
+              return (
+                <button
+                  key={uc.id}
+                  onClick={() => triggerTransition(i)}
+                  className="relative flex-shrink-0 w-[52vw] h-[200px] rounded-[24px] border-none p-0 cursor-pointer touch-manipulation overflow-hidden transition-all duration-400 [scroll-snap-align:start]"
+                  style={{
+                    background: `linear-gradient(to bottom, ${uc.accentFrom}, ${uc.accentTo})`,
+                    opacity: isActive ? 1 : 0.55,
+                    transform: isActive ? 'scale(1)' : 'scale(0.95)',
+                    boxShadow: isActive ? `0 16px 40px ${uc.accentFrom}66` : 'none',
+                  }}
+                >
+                  {/* Thumbnail image */}
+                  <img
+                    src={uc.thumbnail}
+                    alt={uc.label}
+                    className="absolute inset-x-0 top-0 w-full object-contain pointer-events-none transition-all duration-400"
+                    style={{
+                      height: 'calc(100% - 2.4rem)',
+                      transform: `scale(${uc.thumbScale * (isActive ? 0.9 : 0.78)})`,
+                      transformOrigin: 'center bottom',
+                    }}
+                  />
+                  {/* Label bar */}
+                  <div className="absolute bottom-0 inset-x-0 h-10 flex items-center justify-center px-3 bg-black/20 backdrop-blur-sm">
+                    <span className="text-[0.78rem] font-bold text-white text-center leading-none whitespace-nowrap [text-shadow:0_2px_8px_rgba(0,0,0,0.5)]">
+                      {uc.tabLabel}
+                    </span>
+                  </div>
+                  {/* Active ring */}
+                  {isActive && (
+                    <div className="absolute inset-0 rounded-[24px] border-2 border-white/60 pointer-events-none" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          {/* Scroll dots */}
+          <div className="flex justify-center gap-1.5 mt-2">
+            {useCases.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => triggerTransition(i)}
+                className={`rounded-full transition-all duration-300 ${i === activeDisplayIndex ? 'w-5 h-1.5 bg-[#81bb26]' : 'w-1.5 h-1.5 bg-white/25'}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* ── DESKTOP: original row thumbnails ── */}
+        <div className="hidden md:flex justify-center mb-8 w-full">
           <div
             ref={tabsRef}
-            className="flex w-full md:w-auto md:gap-10 overflow-x-auto md:overflow-visible pb-2 md:pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex md:w-auto md:gap-10 overflow-x-auto md:overflow-visible pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {useCases.map((uc, i) => {
               const isActive = i === activeDisplayIndex;
@@ -237,19 +293,16 @@ export default function DetailedUseCases() {
                   key={uc.id}
                   onMouseEnter={() => triggerTransition(i)}
                   onClick={() => triggerTransition(i)}
-                  className="relative flex flex-col-reverse items-center text-center cursor-pointer overflow-visible flex-1 md:flex-shrink-0 md:w-[180px] lg:w-[200px] h-[130px] md:h-[220px] lg:h-[230px] border-none bg-transparent p-0 transition-all duration-300 touch-manipulation"
+                  className="relative flex flex-col-reverse items-center text-center cursor-pointer overflow-visible flex-shrink-0 w-[180px] lg:w-[200px] h-[220px] lg:h-[230px] border-none bg-transparent p-0 transition-all duration-300"
                 >
-                  {/* Gradient background pill */}
                   <div
-                    className="absolute bottom-0 left-0 w-full rounded-[16px] md:rounded-[32px] lg:rounded-[40px] -z-[1] transition-all duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
+                    className="absolute bottom-0 left-0 w-full rounded-[32px] lg:rounded-[40px] -z-[1] transition-all duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
                     style={{
                       background: `linear-gradient(to bottom, ${uc.accentFrom}, ${uc.accentTo})`,
                       height: isActive ? '100%' : '38px',
                       opacity: isActive ? 1 : 0.5,
                     }}
                   />
-
-                  {/* Thumbnail image — centered in card, above label */}
                   <img
                     src={uc.thumbnail}
                     alt={uc.label}
@@ -260,13 +313,8 @@ export default function DetailedUseCases() {
                       transformOrigin: 'center',
                     }}
                   />
-
-
-                  {/* Label + active dot */}
-                  <div className="relative z-10 w-full px-1 md:px-2 flex flex-col items-center justify-center gap-1 mb-1.5 md:mb-4">
-                    <span className="text-[0.72rem] md:text-[0.88rem] font-bold text-white text-center leading-none whitespace-nowrap [text-shadow:0_4px_12px_rgba(0,0,0,0.6)]">{uc.tabLabel}</span>
-                    {/* Active dot — mobile only */}
-                    <span className={`block md:hidden w-1 h-1 rounded-full transition-all duration-300 ${isActive ? 'bg-white scale-100' : 'bg-white/30 scale-75'}`} />
+                  <div className="relative z-10 w-full px-2 flex items-center justify-center mb-4">
+                    <span className="text-[0.88rem] font-bold text-white text-center leading-none whitespace-nowrap [text-shadow:0_4px_12px_rgba(0,0,0,0.6)]">{uc.tabLabel}</span>
                   </div>
                 </button>
               );
