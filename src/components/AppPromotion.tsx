@@ -77,13 +77,13 @@ export default function AppPromotion() {
             transition={{ delay: 0.6, duration: 0.6 }}
           >
             {/* Primary CTA */}
-            <button className="bg-[var(--primary)] text-white px-8 md:px-11 py-3.5 md:py-5 rounded-full text-[0.9rem] md:text-[1rem] font-medium shadow-[0_10px_25px_rgba(129,187,38,0.2)] transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] hover:-translate-y-1.5 hover:bg-[var(--primary-hover)] hover:shadow-[0_20px_40px_rgba(129,187,38,0.4)] cursor-pointer">
+            <button className="bg-[var(--primary)] text-white px-8 py-3.5 rounded-full text-[0.9rem] font-medium shadow-[0_10px_25px_rgba(129,187,38,0.2)] transition-all duration-300 hover:-translate-y-1.5 hover:bg-[var(--primary-hover)] hover:shadow-[0_20px_40px_rgba(129,187,38,0.4)] cursor-pointer">
               Create Now
             </button>
 
             {/* Desktop-only: Upload Image */}
-            <button className="hidden md:flex bg-white text-[#111827] px-11 py-5 rounded-full text-[1rem] font-medium border border-black/10 items-center gap-3 transition-all duration-300 hover:-translate-y-1.5 hover:bg-[#fdfdfd] hover:border-black/20 hover:shadow-[0_15px_35px_rgba(0,0,0,0.08)] cursor-pointer">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button className="hidden md:flex bg-white text-[#111827] px-8 py-3.5 rounded-full text-[0.9rem] font-medium border border-black/10 items-center gap-2.5 transition-all duration-300 hover:-translate-y-1.5 hover:bg-[#fdfdfd] hover:border-black/20 hover:shadow-[0_15px_35px_rgba(0,0,0,0.08)] cursor-pointer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="17 8 12 3 7 8" />
                 <line x1="12" y1="3" x2="12" y2="15" />
@@ -91,15 +91,10 @@ export default function AppPromotion() {
               Upload Image
             </button>
 
-            {/* Mobile-only: Download App */}
+            {/* Mobile-only: Download App — Apple-style icon */}
             <button className="flex md:hidden bg-white text-[#111827] px-8 py-3.5 rounded-full text-[0.9rem] font-medium border border-black/10 items-center gap-2.5 transition-all duration-300 hover:-translate-y-1.5 hover:bg-[#fdfdfd] hover:border-black/20 hover:shadow-[0_15px_35px_rgba(0,0,0,0.08)] cursor-pointer">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v4" />
-                <polyline points="15 13 20 18 15 23" />
-                <path d="m20 18-5-5" />
-                <path d="M12 11h.01" />
-                <path d="M16 11h.01" />
-                <path d="M8 11h.01" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.18 1.37-2.16 3.93.03 3.07 2.66 4.1 2.67 4.1l-.06.19zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
               </svg>
               Download App
             </button>
