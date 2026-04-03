@@ -2,10 +2,14 @@
 
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import styles from './CaseStudies.module.css';
 
 // ─── Card 1: Success Stories by Industry ────────────────────────────────────
-const INDUSTRY_DATA = {
+const INDUSTRY_DATA: Record<string, {
+  eyebrow: string;
+  title: string;
+  desc: string;
+  metrics: { value: string; label: string }[];
+}> = {
   "Home & Furniture": {
     eyebrow: "IKEA ALREADY WINS",
     title: "How IKEA Turned Product Photos into True-to-Scale AR Furniture Experiences",
@@ -47,9 +51,9 @@ const INDUSTRY_DATA = {
     ]
   },
   "Quick Service Restaurants": {
-    eyebrow: "KFC ALREADY WINS",
-    title: "How KFC Made Menu Items Come Alive with Scan-to-See AR on Tray Liners",
-    desc: "KFC prints QR codes on tray liners and packaging that trigger ConvertinAr 3D AR models created from menu photos. Customers scan and watch menu items appear steaming, rotating, and life-size on their table in augmented reality. This instant image to AR experience drives upsells, combo upgrades, and loyalty sign-ups.",
+    eyebrow: "BURGER KING ALREADY WINS",
+    title: "How Burger King Made Menu Items Come Alive with Scan-to-See AR on Tray Liners",
+    desc: "Burger King prints QR codes on tray liners and packaging that trigger ConvertinAr 3D AR models created from menu photos. Customers scan and watch menu items appear steaming, rotating, and life-size on their table in augmented reality. This instant image to AR experience drives upsells, combo upgrades, and loyalty sign-ups.",
     metrics: [
       { value: "46%", label: "QR-to-Lead Conv." },
       { value: "106 Sec", label: "AR Engagement" },
@@ -59,7 +63,12 @@ const INDUSTRY_DATA = {
 };
 
 // ─── Card 2: Success Stories by Use Case ────────────────────────────────────
-const USECASE_DATA = {
+const USECASE_DATA: Record<string, {
+  eyebrow: string;
+  title: string;
+  desc: string;
+  metrics: { value: string; label: string }[];
+}> = {
   "Marketing Campaigns": {
     eyebrow: "GLOBAL BRANDS ALREADY ACTIVATE",
     title: "Make Your Ads Impossible to Scroll Past with Scan-to-Launch AR",
@@ -122,7 +131,7 @@ const USECASE_DATA = {
   }
 };
 
-// ─── Two cards ───────────────────────────────────────────────────────────────
+// ─── Two cards config ────────────────────────────────────────────────────────
 const CASE_STUDIES = [
   {
     id: "industry",
@@ -146,50 +155,80 @@ const CASE_STUDIES = [
 
 // ─── Mockup visual ───────────────────────────────────────────────────────────
 const VisualMockup = () => (
-  <div className={styles.mockupContainer}>
-    <div className={styles.mockupStore}>
-      <div className={styles.placeholderImage} />
+  <div className="relative w-full h-full">
+    {/* Store bg card */}
+    <div className="absolute right-0 bottom-0 w-4/5 h-[70%] bg-white/40 backdrop-blur-[10px] rounded-[24px] border border-white/50 shadow-[0_20px_40px_rgba(0,0,0,0.05)] overflow-hidden z-[1]">
+      {/* Checkerboard placeholder */}
+      <div
+        className="w-full h-full"
+        style={{
+          background: 'linear-gradient(45deg, rgba(0,0,0,0.02) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.02) 75%, transparent 75%, transparent)',
+          backgroundSize: '20px 20px'
+        }}
+      />
     </div>
-    <div className={styles.mockupContentCard}>
-      <div className={styles.cardInner}>
-        <div className={styles.cardWheel} />
-        <div className={styles.cardLines}>
-          <div className={styles.line} />
-          <div className={styles.lineShort} />
+
+    {/* Content card */}
+    <div className="absolute left-0 bottom-[30px] w-[200px] lg:w-[240px] h-[260px] lg:h-[300px] bg-white rounded-[20px] shadow-[0_25px_50px_rgba(0,0,0,0.1)] border border-black/5 z-[3] overflow-hidden p-5 lg:p-6">
+      <div className="flex flex-col gap-4">
+        <div className="w-full aspect-square rounded-full bg-[var(--primary)] opacity-10 border-2 border-dashed border-[var(--primary)]" />
+        <div className="flex flex-col gap-2">
+          <div className="h-2 w-full bg-black/5 rounded" />
+          <div className="h-2 w-3/5 bg-black/5 rounded" />
         </div>
       </div>
     </div>
-    <div className={styles.mockupLogo}>
-      <div className={styles.logoCircle} />
+
+    {/* Logo chip */}
+    <div className="absolute right-[15%] top-[10%] w-[100px] lg:w-[120px] h-[50px] lg:h-[60px] bg-white rounded-[12px] shadow-[0_10px_25px_rgba(0,0,0,0.05)] flex items-center justify-center z-[4]">
+      <div className="w-9 h-9 rounded-full bg-slate-100" />
     </div>
   </div>
 );
 
-// ─── Card Component (unchanged) ─────────────────────────────────────────────
-const Card = ({ i, study, progress, range, targetScale, targetBrightness }: any) => {
+// ─── Card Component ──────────────────────────────────────────────────────────
+const Card = ({
+  i,
+  study,
+  progress,
+  range,
+  targetScale,
+  targetBrightness
+}: {
+  i: number;
+  study: typeof CASE_STUDIES[0];
+  progress: any;
+  range: [number, number];
+  targetScale: number;
+  targetBrightness: number;
+}) => {
   const [activeTab, setActiveTab] = useState(study.pills[0]);
   const currentData = study.data[activeTab];
 
   const scale = useTransform(progress, range, [1, targetScale]);
   const brightness = useTransform(progress, range, [1, targetBrightness]);
-  const filter = useTransform(brightness, (b) => `brightness(${b})`);
+  const filter = useTransform(brightness, (b: number) => `brightness(${b})`);
 
   return (
-    <div className={styles.cardContainer}>
+    /* cardContainer: sticky travel height */
+    <div className="h-[90vh] flex items-start justify-center sticky top-0 px-4 md:px-8">
       <motion.div
-        className={styles.card}
+        className="w-full max-w-[1100px] min-h-[520px] rounded-[28px] md:rounded-[40px] p-6 md:p-14 shadow-[0_30px_80px_rgba(0,0,0,0.05)] flex flex-col gap-6 md:gap-10 border border-black/5 overflow-hidden"
         style={{
           scale,
           filter,
           top: "12vh",
           zIndex: i + 1,
           backgroundColor: study.bgColor,
-          color: study.textColor
+          color: study.textColor,
+          transformOrigin: 'top',
+          position: 'sticky',
         }}
       >
-        <div className={styles.cardHeader}>
+        {/* Card Header */}
+        <div className="flex flex-col gap-3 md:gap-6">
           <motion.h2
-            className={styles.cardSectionTitle}
+            className="text-[1.3rem] md:text-[1.75rem] font-medium text-[#111827] tracking-[-0.01em]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -197,13 +236,19 @@ const Card = ({ i, study, progress, range, targetScale, targetBrightness }: any)
           >
             {study.sectionTitle}
           </motion.h2>
-          <div className={styles.pillGroup}>
-            {study.pills.map((pill: string) => (
+
+          {/* Pills — horizontal scroll on mobile */}
+          <div className="flex gap-2 md:gap-3 flex-wrap overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {study.pills.map((pill) => (
               <button
                 key={pill}
-                className={`${styles.pill} ${pill === activeTab ? styles.pillActive : ''}`}
-                style={pill === activeTab ? { backgroundColor: study.accentColor } : {}}
                 onClick={() => setActiveTab(pill)}
+                className={`flex-shrink-0 px-3 md:px-5 py-1.5 md:py-2 rounded-full border text-[0.7rem] md:text-[0.8rem] font-medium cursor-pointer transition-all duration-300 whitespace-nowrap
+                  ${pill === activeTab
+                    ? 'text-white border-[#004b50]'
+                    : 'text-[#6b7280] bg-white/50 border-black/8 hover:border-black/20'
+                  }`}
+                style={pill === activeTab ? { backgroundColor: study.accentColor } : {}}
               >
                 {pill}
               </button>
@@ -211,7 +256,8 @@ const Card = ({ i, study, progress, range, targetScale, targetBrightness }: any)
           </div>
         </div>
 
-        <div className={styles.cardBody}>
+        {/* Card Body */}
+        <div className="flex-1 flex items-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -219,14 +265,20 @@ const Card = ({ i, study, progress, range, targetScale, targetBrightness }: any)
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className={styles.bodyContent}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center w-full"
             >
-              <div className={styles.content}>
-                <div className={styles.eyebrowBox}>
-                  <span className={styles.eyebrowText}>{currentData.eyebrow}</span>
+              {/* Text content */}
+              <div className="flex flex-col gap-4 md:gap-5">
+                {/* Eyebrow */}
+                <div className="inline-flex bg-white px-2.5 py-1 rounded-[6px] border border-black/5 w-fit">
+                  <span className="text-[0.65rem] md:text-[0.7rem] font-bold tracking-[0.05em] text-[#111827] uppercase">
+                    {currentData.eyebrow}
+                  </span>
                 </div>
+
+                {/* Title */}
                 <motion.h3
-                  className={styles.caseTitle}
+                  className="text-[1.2rem] md:text-[1.6rem] font-medium leading-[1.25]"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -234,24 +286,44 @@ const Card = ({ i, study, progress, range, targetScale, targetBrightness }: any)
                 >
                   {currentData.title}
                 </motion.h3>
-                <p className={styles.caseDesc}>{currentData.desc}</p>
 
-                <div className={styles.metricsGrid}>
-                  {currentData.metrics.map((metric: any, idx: number) => (
-                    <div key={idx} className={styles.metricItem}>
-                      <div className={styles.metricValue} style={{ color: study.accentColor }}>{metric.value}</div>
-                      <div className={styles.metricLabel}>{metric.label}</div>
-                      {idx < currentData.metrics.length - 1 && <div className={styles.metricDivider} />}
+                {/* Desc */}
+                <p className="text-[0.82rem] md:text-[0.9rem] leading-[1.6] text-justify text-[#4b5563] opacity-85">
+                  {currentData.desc}
+                </p>
+
+                {/* Metrics */}
+                <div className="flex gap-4 md:gap-8 mt-1 md:mt-2 flex-wrap">
+                  {currentData.metrics.map((metric, idx) => (
+                    <div key={idx} className="relative flex flex-col gap-[3px] md:gap-1">
+                      <div
+                        className="text-[1.4rem] md:text-[1.75rem] font-semibold"
+                        style={{ color: study.accentColor }}
+                      >
+                        {metric.value}
+                      </div>
+                      <div className="text-[0.68rem] md:text-[0.75rem] font-medium text-[#6b7280] whitespace-nowrap">
+                        {metric.label}
+                      </div>
+                      {idx < currentData.metrics.length - 1 && (
+                        <div className="absolute right-[-0.5rem] md:right-[-1rem] top-0 bottom-0 w-px bg-black/10 hidden md:block" />
+                      )}
                     </div>
                   ))}
                 </div>
 
-                <a href="#" className={styles.readMore}>
-                  Read case study <span className={styles.arrowIcon}>→</span>
+                {/* Read more */}
+                <a
+                  href="#"
+                  className="mt-2 md:mt-4 inline-flex items-center gap-2 font-semibold text-[#111827] no-underline text-[0.8rem] md:text-[0.85rem] group"
+                >
+                  Read case study{' '}
+                  <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </a>
               </div>
 
-              <div className={styles.visualColumn}>
+              {/* Visual — hidden on small mobile, shown md+ */}
+              <div className="hidden md:flex relative h-[320px] lg:h-[400px] items-center justify-center">
                 <VisualMockup />
               </div>
             </motion.div>
@@ -271,11 +343,17 @@ export default function CaseStudies() {
   });
 
   return (
-    <section ref={container} className={styles.section} id="case-studies">
-      <div className={styles.container}>
-        <div className={styles.mainHeader}>
+    <section
+      ref={container}
+      id="case-studies"
+      className="relative bg-white py-24 md:py-28"
+    >
+      <div className="max-w-[1200px] mx-auto">
+
+        {/* Main header */}
+        <div className="text-center mb-16 md:mb-24 px-6 md:px-8">
           <motion.h2
-            className={styles.mainTitle}
+            className="text-[2.2rem] md:text-[2.6rem] font-semibold text-[#111827] mb-4 md:mb-6 tracking-[-0.02em]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -283,12 +361,13 @@ export default function CaseStudies() {
           >
             Impactful <span className="gradient-text">Success Stories</span>
           </motion.h2>
-          <p className={styles.mainSubtitle}>
+          <p className="text-[0.95rem] md:text-[1.1rem] text-[#6b7280] max-w-[700px] mx-auto leading-[1.6]">
             Upload an image. Get a 3D model. Drop a QR code. Watch customers experience your product in their world before they ever buy.
           </p>
         </div>
 
-        <div className={styles.stack}>
+        {/* Stacking cards */}
+        <div className="relative flex flex-col">
           {CASE_STUDIES.map((study, idx) => {
             const rangeStart = idx * (1 / CASE_STUDIES.length);
             const targetScale = idx === 0 ? 0.92 : 1;
@@ -307,6 +386,7 @@ export default function CaseStudies() {
             );
           })}
         </div>
+
       </div>
     </section>
   );
