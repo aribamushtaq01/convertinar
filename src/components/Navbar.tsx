@@ -48,6 +48,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const cur = window.scrollY;
+      // If we are scrolling down, hide the navbar. If up, show it.
       if (cur > 80 && cur > lastScrollY.current) {
         setIsHidden(true);
         setIsMobileMenuOpen(false);
@@ -62,58 +63,102 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`
-      fixed top-0 left-0 right-0 h-[70px] z-[1000]
-      flex items-center transition-all duration-[400ms] ease-in-out
-      ${isScrolled ? 'bg-white border-b border-black/5 shadow-sm' : 'bg-transparent'}
-      ${isHidden && !isMobileMenuOpen ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}
-    `}>
-      <div className="w-full max-w-[1200px] mx-auto px-6 md:px-10 flex items-center justify-between">
+    <>
+      <nav className={`
+        fixed top-0 left-0 right-0 h-[70px] z-[1001]
+        flex items-center transition-all duration-[400ms] ease-in-out
+        ${isScrolled || isMobileMenuOpen ? 'bg-white border-b border-black/5 shadow-sm' : 'bg-transparent'}
+        ${isHidden && !isMobileMenuOpen ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}
+      `}>
+        <div className="w-full max-w-[1200px] mx-auto px-6 md:px-10 flex items-center justify-between">
 
-        {/* Left: Logo */}
-        <div className="flex shrink-0">
-          <Link href="/" className="flex items-center gap-2 group no-underline">
-            <Image src="/logo.png" alt="Logo" width={42} height={42} className="transition-transform duration-300 group-hover:scale-105" />
-            <span className="text-[1.25rem] font-bold tracking-tight text-foreground">
-              Convertin<span className="text-primary">Ar</span>
-            </span>
-          </Link>
+          {/* Left: Logo */}
+          <div className="flex shrink-0">
+            <Link href="/" className="flex items-center gap-2 group no-underline">
+              <Image src="/logo.png" alt="Logo" width={42} height={42} className="transition-transform duration-300 group-hover:scale-105" />
+              <span className="text-[1.25rem] font-bold tracking-tight text-foreground">
+                Convertin<span className="text-primary">Ar</span>
+              </span>
+            </Link>
+          </div>
+
+          {/* Center: Desktop Links */}
+          <div className="hidden lg:flex items-center gap-8">
+            <DesktopDropdown label="Products" items={PRODUCTS} />
+            <DesktopDropdown label="Use Cases" items={USE_CASES} />
+            <Link href="/pricing" className="text-muted text-[0.85rem] font-medium no-underline hover:text-primary transition-colors">
+              Pricing
+            </Link>
+          </div>
+
+          {/* Right: Desktop CTAs */}
+          <div className="hidden lg:flex items-center gap-6">
+            <Link href="/login" className="text-muted text-[0.85rem] font-medium no-underline hover:text-primary">
+              Login
+            </Link>
+            <Link href="/create" className="
+              bg-primary text-white px-7 py-2.5 rounded-full
+              text-[0.85rem] font-semibold no-underline
+              shadow-primary-glow transition-all duration-300 
+              hover:-translate-y-0.5 hover:bg-primary-hover hover:shadow-primary-hover
+            ">
+              Create Ar
+            </Link>
+          </div>
+
+          {/* Hamburger for Mobile */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden flex flex-col gap-1.5 w-6 cursor-pointer bg-transparent border-none p-0 z-[1002]"
+          >
+            <span className={`w-full h-[2px] bg-foreground transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-[8px]' : ''}`} />
+            <span className={`w-full h-[2px] bg-foreground transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+            <span className={`w-full h-[2px] bg-foreground transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-[8px]' : ''}`} />
+          </button>
         </div>
+      </nav>
 
-        {/* Center: Desktop Links */}
-        <div className="hidden lg:flex items-center gap-8">
-          <DesktopDropdown label="Products" items={PRODUCTS} />
-          <DesktopDropdown label="Use Cases" items={USE_CASES} />
-          <Link href="/pricing" className="text-muted text-[0.85rem] font-medium no-underline hover:text-primary transition-colors">
+      {/* --- Mobile Menu Overlay --- */}
+      <div className={`
+        fixed inset-0 bg-white z-[1000] pt-[90px] px-6 transition-all duration-500 ease-in-out lg:hidden
+        ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}
+      `}>
+        <div className="flex flex-col gap-6 overflow-y-auto max-h-[calc(100vh-100px)]">
+
+          <div className="flex flex-col gap-3">
+            <p className="text-[0.75rem] uppercase tracking-widest text-muted-foreground font-bold opacity-50">Products</p>
+            {PRODUCTS.map((item) => (
+              <Link key={item.href} href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-foreground no-underline">
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="h-[1px] bg-black/5 w-full" />
+
+          <div className="flex flex-col gap-3">
+            <p className="text-[0.75rem] uppercase tracking-widest text-muted-foreground font-bold opacity-50">Use Cases</p>
+            {USE_CASES.map((item) => (
+              <Link key={item.href} href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-foreground no-underline">
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-foreground no-underline">
             Pricing
           </Link>
-        </div>
 
-        {/* Right: Desktop CTAs */}
-        <div className="hidden lg:flex items-center gap-6">
-          <Link href="/login" className="text-muted text-[0.85rem] font-medium no-underline hover:text-primary">
-            Login
-          </Link>
-          <Link href="/create" className="
-            bg-primary text-white px-7 py-2.5 rounded-full
-            text-[0.85rem] font-semibold no-underline
-            shadow-primary-glow transition-all duration-300 
-            hover:-translate-y-0.5 hover:bg-primary-hover hover:shadow-primary-hover
-          ">
-            Create Ar
-          </Link>
+          <div className="flex flex-col gap-4 mt-4 pb-10">
+            <Link href="/login" onClick={() => setIsMobileMenuOpen(false)} className="text-center py-3 rounded-xl border border-black/10 font-medium no-underline">
+              Login
+            </Link>
+            <Link href="/create" onClick={() => setIsMobileMenuOpen(false)} className="text-center py-3 rounded-xl bg-primary text-white font-bold no-underline shadow-lg">
+              Create Ar
+            </Link>
+          </div>
         </div>
-
-        {/* Hamburger for Mobile */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden flex flex-col gap-1 w-6 cursor-pointer bg-transparent border-none p-0"
-        >
-          <span className={`w-full h-[2px] bg-foreground transition-all ${isMobileMenuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
-          <span className={`w-full h-[2px] bg-foreground transition-all ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-          <span className={`w-full h-[2px] bg-foreground transition-all ${isMobileMenuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
-        </button>
       </div>
-    </nav>
+    </>
   );
 }
