@@ -237,15 +237,15 @@ export default function DetailedUseCases() {
                   key={uc.id}
                   onMouseEnter={() => triggerTransition(i)}
                   onClick={() => triggerTransition(i)}
-                  className="relative flex flex-col-reverse items-center text-center cursor-pointer overflow-visible flex-1 md:flex-shrink-0 md:w-[180px] lg:w-[200px] h-[160px] md:h-[220px] lg:h-[230px] border-none bg-transparent p-0 transition-all duration-300"
+                  className="relative flex flex-col-reverse items-center text-center cursor-pointer overflow-visible flex-1 md:flex-shrink-0 md:w-[180px] lg:w-[200px] h-[130px] md:h-[220px] lg:h-[230px] border-none bg-transparent p-0 transition-all duration-300 touch-manipulation"
                 >
                   {/* Gradient background pill */}
                   <div
-                    className="absolute bottom-0 left-0 w-full rounded-[20px] md:rounded-[32px] lg:rounded-[40px] -z-[1] transition-all duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
+                    className="absolute bottom-0 left-0 w-full rounded-[16px] md:rounded-[32px] lg:rounded-[40px] -z-[1] transition-all duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
                     style={{
                       background: `linear-gradient(to bottom, ${uc.accentFrom}, ${uc.accentTo})`,
-                      height: isActive ? '100%' : '60px',
-                      opacity: isActive ? 1 : 0.4,
+                      height: isActive ? '100%' : '38px',
+                      opacity: isActive ? 1 : 0.5,
                     }}
                   />
 
@@ -255,16 +255,18 @@ export default function DetailedUseCases() {
                     alt={uc.label}
                     className="absolute inset-x-0 top-0 w-full pointer-events-none transition-all duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)] object-contain"
                     style={{
-                      height: 'calc(100% - 2.2rem)',
-                      transform: isActive ? `scale(${uc.thumbScale * 0.92})` : `scale(${uc.thumbScale * 0.72})`,
+                      height: 'calc(100% - 1.8rem)',
+                      transform: isActive ? `scale(${uc.thumbScale * 0.88}) translateY(-4px)` : `scale(${uc.thumbScale * 0.68})`,
                       transformOrigin: 'center',
                     }}
                   />
 
 
-                  {/* Label - single line, uniform font, fixed bottom position */}
-                  <div className="relative z-10 w-full px-1 md:px-2 flex items-center justify-center mb-2 md:mb-4">
+                  {/* Label + active dot */}
+                  <div className="relative z-10 w-full px-1 md:px-2 flex flex-col items-center justify-center gap-1 mb-1.5 md:mb-4">
                     <span className="text-[0.72rem] md:text-[0.88rem] font-bold text-white text-center leading-none whitespace-nowrap [text-shadow:0_4px_12px_rgba(0,0,0,0.6)]">{uc.tabLabel}</span>
+                    {/* Active dot — mobile only */}
+                    <span className={`block md:hidden w-1 h-1 rounded-full transition-all duration-300 ${isActive ? 'bg-white scale-100' : 'bg-white/30 scale-75'}`} />
                   </div>
                 </button>
               );
