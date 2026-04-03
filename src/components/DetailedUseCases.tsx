@@ -1,18 +1,23 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import styles from "./DetailedUseCases.module.css";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const useCases = [
   {
     id: "e-commerce",
     label: "E-Commerce",
+    tabLabel: "E-Commerce",
+    thumbScale: 1,
     thumbnail: "/e-commerce.png",
-    accentFrom: "#6ea420", accentTo: " #81bb26",
+    accentFrom: "#6ea420", accentTo: "#81bb26",
     subtitleColor: "#81bb26", btnFrom: "#6ea420", btnTo: "#81bb26",
     subtitle: "Sell more. Return less.",
-    features: ["Let shoppers place your product in their own space before they checkout.", "Works on Shopify, WooCommerce, IKEA, and any custom store.", "Brands using AR see up to 94% higher conversion and 40% fewer returns."],
+    features: [
+      "Let shoppers place your product in their own space before they checkout.",
+      "Works on Shopify, WooCommerce, IKEA, and any custom store.",
+      "Brands using AR see up to 94% higher conversion and 40% fewer returns.",
+    ],
     href: "/use-cases/e-commerce",
     image: null,
     video: null,
@@ -20,11 +25,17 @@ const useCases = [
   {
     id: "marketing-campaigns",
     label: "Marketing Campaigns",
+    tabLabel: "Marketing",
+    thumbScale: 1,
     thumbnail: "/marketing.png",
-    accentFrom: "#6ea420", accentTo: " #81bb26",
+    accentFrom: "#6ea420", accentTo: "#81bb26",
     subtitleColor: "#81bb26", btnFrom: "#6ea420", btnTo: "#81bb26",
     subtitle: "Make your ads impossible to scroll pass.",
-    features: ["Turn static visuals into interactive AR experiences with QR codes.", "Launch products straight from flyers, billboards, or social stories.", "AR experiences drive 3x longer engagement than standard content."],
+    features: [
+      "Turn static visuals into interactive AR experiences with QR codes.",
+      "Launch products straight from flyers, billboards, or social stories.",
+      "AR experiences drive 3x longer engagement than standard content.",
+    ],
     href: "/use-cases/marketing-campaigns",
     image: null,
     video: null,
@@ -32,11 +43,17 @@ const useCases = [
   {
     id: "education",
     label: "Education",
+    tabLabel: "Education",
+    thumbScale: 1,
     thumbnail: "/education.png",
-    accentFrom: "#6ea420", accentTo: " #81bb26",
+    accentFrom: "#6ea420", accentTo: "#81bb26",
     subtitleColor: "#81bb26", btnFrom: "#6ea420", btnTo: "#81bb26",
     subtitle: "Affordable and Accessible 3D Models for educators and students",
-    features: ["Turn lessons into interactive experiences.", "With AR, students and trainees can explore 3D models of anatomy, buildings, or product designs.", "Perfect for schools, corporate training, and e-learning platforms."],
+    features: [
+      "Turn lessons into interactive experiences.",
+      "With AR, students and trainees can explore 3D models of anatomy, buildings, or product designs.",
+      "Perfect for schools, corporate training, and e-learning platforms.",
+    ],
     href: "/use-cases/education",
     image: null,
     video: null,
@@ -44,11 +61,17 @@ const useCases = [
   {
     id: "gaming",
     label: "Gaming and Interactive Media",
+    tabLabel: "Gaming & Media",
+    thumbScale: 0.82,
     thumbnail: "/gaming.png",
-    accentFrom: "#6ea420", accentTo: " #81bb26",
+    accentFrom: "#6ea420", accentTo: "#81bb26",
     subtitleColor: "#81bb26", btnFrom: "#6ea420", btnTo: "#81bb26",
     subtitle: "Put your characters and assets into the real world.",
-    features: ["Convert game assets into QR-based AR experiences with interactive 3D characters and items.", "Turn unboxing into immersive, buzz-worthy AR experiences.", "Increase engagement through AR collectibles and trading cards."],
+    features: [
+      "Convert game assets into QR-based AR experiences with interactive 3D characters and items.",
+      "Turn unboxing into immersive, buzz-worthy AR experiences.",
+      "Increase engagement through AR collectibles and trading cards.",
+    ],
     href: "/use-cases/game-development",
     image: null,
     video: null,
@@ -71,10 +94,81 @@ function CaretRight() {
   );
 }
 
+function PanelContent({
+  uc,
+  videoRef,
+}: {
+  uc: typeof useCases[number];
+  videoRef: (el: HTMLVideoElement | null) => void;
+}) {
+  return (
+    <>
+      {/* Left: text */}
+      <div className="flex flex-col">
+        <motion.h2
+          className="text-[2rem] md:text-[clamp(2.5rem,4.5vw,5rem)] font-extrabold leading-[1.05] text-white mb-3 md:mb-[14px] tracking-[-0.03em]"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {uc.label}
+        </motion.h2>
+
+        <p
+          className="text-[0.85rem] md:text-[clamp(0.85rem,1.1vw,1rem)] font-medium leading-[1.6] mb-4 md:mb-6"
+          style={{ color: uc.subtitleColor }}
+        >
+          {uc.subtitle}
+        </p>
+
+        <ul className="list-none p-0 m-0 mb-6 md:mb-8 flex flex-col gap-3 md:gap-4">
+          {uc.features.map((f) => (
+            <li key={f} className="flex items-start gap-2.5">
+              <CheckIcon />
+              <span className="text-[0.82rem] md:text-[clamp(0.875rem,1.1vw,1rem)] font-normal text-white leading-[1.5]">
+                {f}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href={uc.href}
+          className="inline-flex flex-row-reverse items-center gap-2.5 px-6 md:px-[30px] py-2.5 md:py-3 rounded-full text-[0.9rem] md:text-[1rem] font-bold text-black w-fit no-underline transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(43,249,7,0.3)]"
+          style={{ background: `linear-gradient(to bottom, ${uc.btnFrom}, ${uc.btnTo})` }}
+        >
+          <span className="flex items-center w-5 h-5"><CaretRight /></span>
+          Explore More
+        </a>
+      </div>
+
+      {/* Right: media */}
+      <div className="relative aspect-video rounded-[16px] md:rounded-[20px] overflow-hidden bg-[#111] shadow-[0_24px_80px_rgba(0,0,0,0.6)] order-first md:order-none">
+        {uc.video ? (
+          <video
+            ref={videoRef}
+            src={uc.video}
+            muted loop playsInline autoPlay
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <img
+            src={uc.image!}
+            alt={`use case - ${uc.label}`}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        <div
+          className="absolute inset-0 pointer-events-none z-[1]"
+          style={{ background: `radial-gradient(ellipse at 50% 100%, ${uc.accentFrom}44 0%, transparent 70%)` }}
+        />
+      </div>
+    </>
+  );
+}
+
 export default function DetailedUseCases() {
-  // visibleIndex = what's currently shown (fully opaque)
-  // nextIndex    = what's fading in
-  // exitingIndex = what's fading out
   const [visibleIndex, setVisibleIndex] = useState(3);
   const [pendingIndex, setPendingIndex] = useState<number | null>(null);
   const [phase, setPhase] = useState<"idle" | "transitioning">("idle");
@@ -85,14 +179,9 @@ export default function DetailedUseCases() {
 
   const triggerTransition = useCallback((index: number) => {
     if (index === visibleIndex) return;
-
-    // Clear any pending timer
     if (timerRef.current) clearTimeout(timerRef.current);
-
     setPendingIndex(index);
     setPhase("transitioning");
-
-    // After the CSS transition duration (450ms), commit
     timerRef.current = setTimeout(() => {
       setVisibleIndex(index);
       setPendingIndex(null);
@@ -100,7 +189,6 @@ export default function DetailedUseCases() {
     }, 400);
   }, [visibleIndex]);
 
-  // Video management
   useEffect(() => {
     const activeIdx = phase === "transitioning" && pendingIndex !== null ? pendingIndex : visibleIndex;
     videoRefs.current.forEach((v, i) => {
@@ -110,7 +198,6 @@ export default function DetailedUseCases() {
     });
   }, [visibleIndex, pendingIndex, phase]);
 
-  // Scroll pill into view
   useEffect(() => {
     if (!tabsRef.current) return;
     const idx = pendingIndex ?? visibleIndex;
@@ -123,11 +210,12 @@ export default function DetailedUseCases() {
   const exitingCase = phase === "transitioning" ? useCases[visibleIndex] : null;
 
   return (
-    <section className={styles.section}>
-      <div className={styles.inner}>
+    <section className="w-full bg-[#0a0a0a] py-5 md:py-5">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-10">
 
+        {/* Title */}
         <motion.h2
-          className={styles.sectionTitle}
+          className="text-[2.2rem] md:text-[2.6rem] font-semibold text-center text-white mb-6 md:mb-8 tracking-[-0.03em]"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -136,116 +224,75 @@ export default function DetailedUseCases() {
           Who Uses <span className="gradient-text">ConvertInAr</span>
         </motion.h2>
 
-        {/* Tab Thumbnails */}
-        <div className={styles.tabsWrapper}>
-          <div className={styles.tabsScroll} ref={tabsRef}>
-            {useCases.map((uc, i) => (
-              <button
-                key={uc.id}
-                onMouseEnter={() => triggerTransition(i)}
-                onClick={() => triggerTransition(i)}
-                className={`${styles.useCaseThumb} ${i === activeDisplayIndex ? styles.thumbActive : ""}`}
-              >
-                <div
-                  className={styles.thumbBackground}
-                  style={{ background: `linear-gradient(to bottom, ${uc.accentFrom}, ${uc.accentTo})` }}
-                />
-                <img
-                  src={uc.thumbnail}
-                  alt={uc.label}
-                  className={styles.thumbImage}
-                />
-                <div className={styles.thumbLabel}>{uc.label}</div>
-              </button>
-            ))}
+        {/* Tabs — on mobile: equally divided, no scroll; on desktop: centered row */}
+        <div className="flex justify-center mb-6 md:mb-8 w-full">
+          <div
+            ref={tabsRef}
+            className="flex w-full md:w-auto md:gap-10 overflow-x-auto md:overflow-visible pb-2 md:pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {useCases.map((uc, i) => {
+              const isActive = i === activeDisplayIndex;
+              return (
+                <button
+                  key={uc.id}
+                  onMouseEnter={() => triggerTransition(i)}
+                  onClick={() => triggerTransition(i)}
+                  className="relative flex flex-col-reverse items-center text-center cursor-pointer overflow-visible flex-1 md:flex-shrink-0 md:w-[180px] lg:w-[200px] h-[160px] md:h-[220px] lg:h-[230px] border-none bg-transparent p-0 transition-all duration-300"
+                >
+                  {/* Gradient background pill */}
+                  <div
+                    className="absolute bottom-0 left-0 w-full rounded-[20px] md:rounded-[32px] lg:rounded-[40px] -z-[1] transition-all duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
+                    style={{
+                      background: `linear-gradient(to bottom, ${uc.accentFrom}, ${uc.accentTo})`,
+                      height: isActive ? '100%' : '60px',
+                      opacity: isActive ? 1 : 0.4,
+                    }}
+                  />
+
+                  {/* Thumbnail image — centered in card, above label */}
+                  <img
+                    src={uc.thumbnail}
+                    alt={uc.label}
+                    className="absolute inset-x-0 top-0 w-full pointer-events-none transition-all duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)] object-contain"
+                    style={{
+                      height: 'calc(100% - 2.2rem)',
+                      transform: isActive ? `scale(${uc.thumbScale * 0.92})` : `scale(${uc.thumbScale * 0.72})`,
+                      transformOrigin: 'center',
+                    }}
+                  />
+
+
+                  {/* Label - single line, uniform font, fixed bottom position */}
+                  <div className="relative z-10 w-full px-1 md:px-2 flex items-center justify-center mb-2 md:mb-4">
+                    <span className="text-[0.72rem] md:text-[0.88rem] font-bold text-white text-center leading-none whitespace-nowrap [text-shadow:0_4px_12px_rgba(0,0,0,0.6)]">{uc.tabLabel}</span>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Panel wrapper — holds both exiting and entering panels stacked */}
-        <div className={styles.panelWrapper}>
+        {/* Panel */}
+        <div className="relative min-h-[300px] md:min-h-[380px]">
 
           {/* Exiting panel */}
           {exitingCase && (
-            <div className={`${styles.detailPanel} ${styles.exiting}`}>
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 px-0 md:px-6 items-center absolute inset-0 opacity-0 pointer-events-none -translate-y-2 transition-all duration-[450ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+            >
               <PanelContent uc={exitingCase} videoRef={(el) => { videoRefs.current[visibleIndex] = el; }} />
             </div>
           )}
 
-          {/* Visible / entering panel */}
-          <div className={`${styles.detailPanel} ${styles.visible}`}>
+          {/* Visible panel */}
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 px-0 md:px-6 items-center relative opacity-100 translate-y-0 transition-all duration-[450ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+          >
             <PanelContent uc={displayCase} videoRef={(el) => { videoRefs.current[activeDisplayIndex] = el; }} />
           </div>
 
         </div>
       </div>
     </section>
-  );
-}
-
-function PanelContent({
-  uc,
-  videoRef,
-}: {
-  uc: typeof useCases[number];
-  videoRef: (el: HTMLVideoElement | null) => void;
-}) {
-  return (
-    <>
-      {/* Left */}
-      <div className={styles.detailText}>
-        <motion.h2
-          className={styles.detailTitle}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          {uc.label}
-        </motion.h2>
-        <p className={styles.detailSubtitle} style={{ color: uc.subtitleColor }}>
-          {uc.subtitle}
-        </p>
-        <ul className={styles.featureList}>
-          {uc.features.map((f) => (
-            <li key={f} className={styles.featureItem}>
-              <CheckIcon />
-              <span className={styles.featureLabel}>{f}</span>
-            </li>
-          ))}
-        </ul>
-        <a
-          href={uc.href}
-          className={styles.exploreBtn}
-          style={{ background: `linear-gradient(to bottom, ${uc.btnFrom}, ${uc.btnTo})` }}
-        >
-          <span className={styles.btnIcon}><CaretRight /></span>
-          Explore More
-        </a>
-      </div>
-
-      {/* Right */}
-      <div className={styles.detailMedia}>
-        {uc.video ? (
-          <video
-            ref={videoRef}
-            src={uc.video}
-            muted loop playsInline autoPlay
-            className={styles.mediaVideo}
-          />
-        ) : (
-          <img
-            src={uc.image!}
-            alt={`use case - ${uc.label}`}
-            className={styles.mediaImg}
-          />
-        )}
-        <div
-          className={styles.mediaGlow}
-          style={{
-            background: `radial-gradient(ellipse at 50% 100%, ${uc.accentFrom}44 0%, transparent 70%)`,
-          }}
-        />
-      </div>
-    </>
   );
 }
