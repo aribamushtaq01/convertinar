@@ -14,26 +14,26 @@ export default function Hero() {
           50%       { transform: translateY(-18px) rotate(-1deg); }
         }
         
-        /* Directional Shadow: Pushed to the bottom-right (+x, +y) */
+        /* Significantly Darker Directional Shadows */
         @keyframes floatPhone {
           0%, 100% { 
             transform: rotate(6deg) translateY(0); 
             filter: 
-              drop-shadow(8px 15px 15px rgba(0,0,0,0.3)) 
-              drop-shadow(25px 45px 50px rgba(0,0,0,0.2));
+              drop-shadow(8px 15px 15px rgba(0,0,0,0.7)) 
+              drop-shadow(25px 45px 50px rgba(0,0,0,0.6));
           }
           50% { 
             transform: rotate(3deg) translateY(-25px); 
             filter: 
-              drop-shadow(12px 25px 20px rgba(0,0,0,0.35)) 
-              drop-shadow(45px 75px 85px rgba(0,0,0,0.25));
+              drop-shadow(12px 25px 20px rgba(0,0,0,0.85)) 
+              drop-shadow(45px 75px 85px rgba(0,0,0,0.75));
           }
         }
 
-        /* The 'floor' shadow also moves right to match light direction */
+        /* Darker Floor Shadow */
         @keyframes shadowPulse {
-          0%, 100% { transform: scale(1) translateX(10px); opacity: 0.35; }
-          50% { transform: scale(0.85) translateX(25px); opacity: 0.15; }
+          0%, 100% { transform: scale(1) translateX(10px); opacity: 0.8; }
+          50% { transform: scale(0.85) translateX(25px); opacity: 0.5; }
         }
 
         @keyframes scan {
@@ -93,7 +93,7 @@ export default function Hero() {
 
                 {/* Floating QR Code */}
                 <div className="float-qr absolute z-20 flex flex-col items-center gap-[0.6rem] top-[5%] left-[-10%]">
-                  <div className="relative bg-white rounded-[14px] p-[14px] shadow-[10px_20px_30px_rgba(0,0,0,0.15)] border border-black/5 w-[170px] h-[170px]">
+                  <div className="relative bg-white rounded-[14px] p-[14px] shadow-[15px_25px_40px_rgba(0,0,0,0.5)] border border-black/5 w-[170px] h-[170px]">
                     <Image src="/ar-qr-code-demo-nike.webp" alt="QR" width={180} height={180} className="w-full h-full object-contain" />
                     <div className="scan-line absolute left-0 right-0 h-[3px] bg-[var(--primary)] shadow-[0_0_15px_var(--primary)]" />
                   </div>
