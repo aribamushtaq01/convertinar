@@ -9,7 +9,7 @@
   --primary: #81bb26;
   /* Green */
   --primary-hover: #73a622;
-  --secondary: #6ea420;
+  --secondary: #81bb26;
   /* Darker Green */
   --text-muted: #4b5563;
   --border: rgba(0, 0, 0, 0.1);
@@ -85,9 +85,9 @@ button {
   border: 1px solid var(--glass-border);
 }
 
-/* Gradient Text */
+/* Gradient Text - Updated to use the solid primary green */
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary) 0%, #a3d94b 100%);
+  background: #81bb26;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
