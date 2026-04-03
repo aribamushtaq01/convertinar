@@ -26,7 +26,7 @@ function DesktopDropdown({ label, items }: { label: string; items: NavItem[] }) 
     <div className="relative group">
       <button className="
         flex items-center gap-1.5 text-[0.85rem] font-medium
-        text-[var(--text-muted)] hover:text-[var(--primary)]
+        text-muted hover:text-primary
         bg-transparent border-none p-0 cursor-pointer
         transition-colors duration-200
       ">
@@ -41,8 +41,8 @@ function DesktopDropdown({ label, items }: { label: string; items: NavItem[] }) 
       </button>
       <div className="
         absolute top-full left-1/2 -translate-x-1/2 translate-y-3 z-10
-        bg-white/85 backdrop-blur-[16px]
-        border border-black/[0.08] rounded-xl p-3 min-w-[190px]
+        bg-white/95 backdrop-blur-[16px]
+        border border-black/[0.08] rounded-xl p-3 min-w-[210px]
         shadow-[0_10px_40px_rgba(0,0,0,0.08)]
         flex flex-col gap-1
         opacity-0 invisible
@@ -54,9 +54,9 @@ function DesktopDropdown({ label, items }: { label: string; items: NavItem[] }) 
             key={item.href}
             href={item.href}
             className="
-              text-[var(--text-muted)] text-[0.8rem] font-medium
+              text-muted text-[0.8rem] font-medium
               px-3 py-2 rounded-md no-underline
-              hover:bg-[rgba(129,187,38,0.06)] hover:text-[var(--primary)]
+              hover:bg-primary/10 hover:text-primary
               transition-all duration-200
             "
           >
@@ -71,14 +71,14 @@ function DesktopDropdown({ label, items }: { label: string; items: NavItem[] }) 
 function MobileSection({ title, items, onClose }: { title: string; items: NavItem[]; onClose: () => void }) {
   const [open, setOpen] = useState(false);
   return (
-    <div>
+    <div className="w-full">
       <button
         onClick={() => setOpen(!open)}
         className="
           w-full flex items-center justify-between
-          text-[0.7rem] font-semibold uppercase tracking-[0.6px]
-          text-[var(--text-muted)] hover:text-[var(--primary)]
-          py-1 mb-1 bg-transparent border-none cursor-pointer
+          text-[0.7rem] font-bold uppercase tracking-[1px]
+          text-muted hover:text-primary
+          py-2 bg-transparent border-none cursor-pointer
           transition-colors duration-200
         "
       >
@@ -86,48 +86,33 @@ function MobileSection({ title, items, onClose }: { title: string; items: NavIte
         <svg
           className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
           width="14" height="14" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          stroke="currentColor" strokeWidth="2.5"
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </button>
       <div className={`
-        flex flex-col gap-0.5 overflow-hidden
-        transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]
-        ${open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
+        flex flex-col gap-1 overflow-hidden
+        transition-all duration-300 ease-in-out
+        ${open ? 'max-h-[400px] opacity-100 mt-2' : 'max-h-0 opacity-0'}
       `}>
-        {items.map((item, i) => (
+        {items.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             onClick={onClose}
             className="
-              text-[var(--foreground)] text-[1.05rem] font-medium
+              text-foreground text-[1.05rem] font-semibold
               px-4 py-3 rounded-xl no-underline
-              hover:bg-[rgba(129,187,38,0.07)] hover:text-[var(--primary)]
+              hover:bg-primary/5 hover:text-primary
               transition-all duration-200
             "
-            style={{ transitionDelay: open ? `${i * 25}ms` : '0ms' }}
           >
             {item.label}
           </Link>
         ))}
       </div>
     </div>
-  );
-}
-
-function Hamburger({ open, onClick }: { open: boolean; onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      aria-label={open ? 'Close menu' : 'Open menu'}
-      className="flex lg:hidden flex-col justify-center gap-[5px] w-7 h-7 bg-transparent border-none cursor-pointer z-[1001]"
-    >
-      <span className={`w-full h-[2.5px] bg-[var(--foreground)] rounded-sm transition-all duration-300 origin-center ${open ? 'rotate-45 translate-y-[7.5px]' : ''}`} />
-      <span className={`w-full h-[2.5px] bg-[var(--foreground)] rounded-sm transition-all duration-300 ${open ? 'opacity-0 scale-x-0' : ''}`} />
-      <span className={`w-full h-[2.5px] bg-[var(--foreground)] rounded-sm transition-all duration-300 origin-center ${open ? '-rotate-45 -translate-y-[7.5px]' : ''}`} />
-    </button>
   );
 }
 
@@ -138,137 +123,114 @@ export default function Navbar() {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
-    lastScrollY.current = window.scrollY;
     const handleScroll = () => {
       const cur = window.scrollY;
-      if (cur > 80 && cur > lastScrollY.current) { setIsHidden(true); setIsMobileMenuOpen(false); }
-      else setIsHidden(false);
-      setIsScrolled(cur > 10);
+      // Sticky header logic: hide on scroll down, show on scroll up
+      if (cur > 100 && cur > lastScrollY.current) {
+        setIsHidden(true);
+        setIsMobileMenuOpen(false);
+      } else {
+        setIsHidden(false);
+      }
+      setIsScrolled(cur > 20);
       lastScrollY.current = cur;
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isMobileMenuOpen]);
-
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
-
   return (
     <>
       <nav className={`
-        fixed top-0 left-0 right-0 h-[70px] z-[1000]
+        fixed top-0 left-0 right-0 h-[75px] z-[1000]
         flex items-center justify-center
-        border-b border-transparent will-change-transform
-        transition-[transform,opacity,background,border-color,box-shadow]
-        duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]
-        ${isScrolled ? 'bg-white/95 backdrop-blur-[20px] saturate-[180%] border-black/[0.06] shadow-[0_5px_20px_rgba(0,0,0,0.05)]' : 'bg-transparent'}
-        ${isHidden && !isMobileMenuOpen ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100 pointer-events-auto'}
+        transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+        ${isScrolled ? 'bg-white/90 backdrop-blur-md border-b border-black/[0.05] shadow-sm' : 'bg-transparent'}
+        ${isHidden && !isMobileMenuOpen ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}
       `}>
-        <div className="w-full max-w-[1200px] mx-auto px-8 md:px-5 flex items-center justify-between">
+        <div className="w-full max-w-[1200px] mx-auto px-6 flex items-center justify-between">
 
-          {/* Logo */}
+          {/* Logo Section */}
           <div className="flex-1">
-            <Link href="/" onClick={closeMobileMenu} className="flex items-center gap-2 no-underline group">
-              <Image src="/logo.png" alt="ConvertInAr Logo" width={48} height={48} priority
-                className="w-auto h-12 lg:h-[42px] object-contain transition-transform duration-300 group-hover:scale-105" />
-              <span className="flex items-center text-[1.35rem] lg:text-[1.25rem] font-semibold tracking-[-0.5px] text-[var(--foreground)]">
-                {/* Fixed: Use var(--primary) instead of hardcoded hex in gradient */}
-                Convertin<span className="bg-[var(--primary)] bg-clip-text text-transparent">Ar</span>
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 group shrink-0 w-fit">
+              <Image src="/logo.png" alt="ConvertInAr" width={42} height={42} priority className="transition-transform duration-300 group-hover:scale-110" />
+              <span className="text-[1.25rem] font-bold tracking-tight text-foreground">
+                Convertin<span className="text-primary">Ar</span>
               </span>
             </Link>
           </div>
 
-          {/* Desktop nav */}
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex flex-[2] justify-center items-center gap-10">
             <DesktopDropdown label="Products" items={PRODUCTS} />
             <DesktopDropdown label="Use Cases" items={USE_CASES} />
-            <Link href="/pricing" className="text-[var(--text-muted)] text-[0.85rem] font-medium no-underline hover:text-[var(--primary)] transition-colors duration-200">
+            <Link href="/pricing" className="text-muted text-[0.85rem] font-medium hover:text-primary transition-colors">
               Pricing
             </Link>
           </div>
 
-          {/* Desktop CTAs */}
+          {/* Desktop CTA Group */}
           <div className="hidden lg:flex flex-1 justify-end items-center gap-6">
-            <Link href="/login" className="text-[var(--text-muted)] text-[0.85rem] font-medium no-underline hover:text-[var(--primary)] transition-colors duration-200">
+            <Link href="/login" className="text-muted text-[0.85rem] font-medium hover:text-primary transition-colors">
               Login
             </Link>
             <Link href="/create" className="
-              bg-[var(--primary)] text-white px-[1.6rem] py-[0.7rem] rounded-full
-              text-[0.85rem] font-medium no-underline
-              shadow-[0_4px_12px_rgba(129,187,38,0.2)]
-              transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
-              hover:-translate-y-0.5 hover:bg-[var(--primary-hover)]
-              hover:shadow-[0_8px_20px_rgba(129,187,38,0.4)]
+              bg-primary text-white px-7 py-2.5 rounded-full
+              text-[0.85rem] font-bold shadow-primary-glow
+              hover:bg-primary-hover hover:shadow-primary-hover
+              hover:-translate-y-0.5 transition-all duration-300
             ">
-              Create Ar
+              Create AR
             </Link>
           </div>
 
-          <Hamburger open={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+          {/* Mobile Menu Trigger */}
+          <button
+            className="lg:hidden p-2 text-foreground z-[1001] relative"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Menu"
+          >
+            <div className="w-6 h-5 flex flex-col justify-between items-end">
+              <span className={`h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'w-full rotate-45 translate-y-[9px]' : 'w-full'}`} />
+              <span className={`h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 w-0' : 'w-4/5'}`} />
+              <span className={`h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'w-full -rotate-45 -translate-y-[9px]' : 'w-full'}`} />
+            </div>
+          </button>
         </div>
       </nav>
 
-      {/* Backdrop */}
-      <div
-        onClick={closeMobileMenu}
-        className={`fixed inset-0 z-[998] lg:hidden bg-black/25 backdrop-blur-[2px] transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
-      />
+      {/* Mobile Drawer Overlay */}
+      <div className={`
+        fixed inset-0 z-[998] lg:hidden bg-black/20 backdrop-blur-sm transition-opacity duration-300
+        ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
+      `} onClick={() => setIsMobileMenuOpen(false)} />
 
       {/* Mobile Drawer */}
       <div className={`
-        fixed top-[70px] left-0 right-0 z-[999] lg:hidden
-        bg-white/[0.98] backdrop-blur-[20px]
-        border-t border-black/[0.06]
-        overflow-y-auto max-h-[calc(100vh-70px)]
-        transition-all duration-[400ms] ease-[cubic-bezier(0.32,0.72,0,1)]
-        ${isMobileMenuOpen ? 'translate-y-0 opacity-100 visible' : '-translate-y-full opacity-0 invisible'}
+        fixed top-0 right-0 bottom-0 w-[85%] max-w-[360px] z-[999] lg:hidden bg-white shadow-2xl px-8 pt-24
+        transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
+        ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
       `}>
-        <div className="px-6 sm:px-5 py-8 sm:py-7 flex flex-col gap-7">
+        <div className="flex flex-col gap-8">
+          <MobileSection title="Products" items={PRODUCTS} onClose={() => setIsMobileMenuOpen(false)} />
+          <MobileSection title="Use Cases" items={USE_CASES} onClose={() => setIsMobileMenuOpen(false)} />
 
-          <MobileSection title="Products" items={PRODUCTS} onClose={closeMobileMenu} />
-          <MobileSection title="Use Cases" items={USE_CASES} onClose={closeMobileMenu} />
+          <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-[0.7rem] font-bold uppercase tracking-[1px] text-muted py-2 border-b border-gray-50">
+            Pricing
+          </Link>
 
-          <div>
-            <Link
-              href="/pricing"
-              onClick={closeMobileMenu}
-              className="
-                w-full flex items-center justify-between
-                text-[0.7rem] font-semibold uppercase tracking-[0.6px]
-                text-[var(--text-muted)] hover:text-[var(--primary)]
-                py-1 no-underline
-                transition-colors duration-200
-              "
-            >
-              Pricing
+          <div className="flex flex-col gap-4 mt-4">
+            <Link href="/create" onClick={() => setIsMobileMenuOpen(false)} className="
+              bg-primary text-white py-4 rounded-2xl text-center font-bold text-lg shadow-primary-glow
+            ">
+              Create AR Free
+            </Link>
+            <Link href="/login" onClick={() => setIsMobileMenuOpen(false)} className="
+              text-center py-2 text-muted font-medium hover:text-primary transition-colors
+            ">
+              Existing user? Login
             </Link>
           </div>
-
-          {/* Mobile CTAs */}
-          <div className="flex flex-col gap-3 mt-2 pt-6 border-t border-black/[0.07]">
-            <Link href="/login" onClick={closeMobileMenu} className="
-              text-center py-[0.9rem] rounded-full no-underline
-              text-[var(--text-muted)] font-medium border border-black/10
-              hover:border-[var(--primary)] hover:text-[var(--primary)]
-              transition-all duration-200
-            ">
-              Login
-            </Link>
-            <Link href="/create" onClick={closeMobileMenu} className="
-              text-center py-[0.9rem] rounded-full no-underline
-              bg-[var(--primary)] text-white font-medium
-              shadow-[0_4px_20px_rgba(129,187,38,0.3)]
-              hover:shadow-[0_8px_30px_rgba(129,187,38,0.5)]
-              hover:-translate-y-0.5 transition-all duration-300
-            ">
-              Create Ar
-            </Link>
-          </div>
-
         </div>
       </div>
     </>
