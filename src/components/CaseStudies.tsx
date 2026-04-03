@@ -139,7 +139,7 @@ const CASE_STUDIES = [
     pills: Object.keys(INDUSTRY_DATA),
     data: INDUSTRY_DATA,
     bgColor: "#f3f4f6",
-    accentColor: "#004b50",
+    accentColor: "var(--primary)",
     textColor: "#111827"
   },
   {
@@ -148,7 +148,7 @@ const CASE_STUDIES = [
     pills: Object.keys(USECASE_DATA),
     data: USECASE_DATA,
     bgColor: "#d9f99d",
-    accentColor: "#004b50",
+    accentColor: "var(--primary)",
     textColor: "#111827"
   }
 ];
